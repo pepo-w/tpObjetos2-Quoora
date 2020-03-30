@@ -15,6 +15,7 @@ Reaccion class >> conAutor: unUsuario [
 
 { #category : #boolean }
 Reaccion >> esDelAutor: unUsuario [
+"comentario"
 	^ autor = unUsuario
 ]
 
