@@ -20,8 +20,8 @@ Usuario class >> conNombre: unNombre password: unPassword [
 
 { #category : #adding }
 Usuario >> agregarTopicoDeInteres: unTopico [
-"capas habria que chequear que no lo agrege repetido con addIfNotPresent comentario"
-	topicosDeInteres add: unTopico.
+"el no agregar topicos repetidos se podria implementar desde la interfaz"
+	topicosDeInteres addIfNotPresent: unTopico.
 ]
 
 { #category : #deleting }
@@ -33,6 +33,7 @@ Usuario >> borrarPregunta: unaPregunta [
 
 { #category : #deleting }
 Usuario >> borrarRespuesta: unaRespuesta [
+"se elimina de su coleccion de respuestas, pero sigue estando en la coleccion de respuestas de la pregunta"
 	respuestas remove: unaRespuesta.
 ]
 
@@ -92,7 +93,7 @@ Usuario >> respuestas [
 
 { #category : #adding }
 Usuario >> seguirA: otroUsuario [
-"si ya seguia a ese usuario, no lo vuelve a agregar"
+"el no agregar followers repetidos se podria implementar desde la interfaz"
 	usuariosQueSigue addIfNotPresent: otroUsuario.
 ]
 

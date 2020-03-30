@@ -1,5 +1,5 @@
 Class {
-	#name : #QuooraTest,
+	#name : #CuooraTest,
 	#superclass : #TestCase,
 	#category : #'Objetos_2-Cuoora-Tests'
 }

@@ -31,7 +31,8 @@ UsuarioTest >> testAgregarTopicoDeInteres [
 	self assert: juan topicosDeInteres isEmpty.
 	juan agregarTopicoDeInteres: topico1.
 	self assert: (juan topicosDeInteres size) equals: 1.
-	
+	juan agregarTopicoDeInteres: topico1.
+	self assert: (juan topicosDeInteres size) equals: 1.
 ]
 
 { #category : #tests }
@@ -97,6 +98,15 @@ UsuarioTest >> testCrearRespuesta [
 ]
 
 { #category : #tests }
+UsuarioTest >> testPreguntasConTopico [
+	juan crearPreguntaConTitulo: 'un titulo' descripcion: 'pregunta con topico 1' topicosAsociados: (OrderedCollection with: topico1).
+	juan crearPreguntaConTitulo: 'otro titulo' descripcion: 'pregunta con topicos 1 y 2' topicosAsociados: (OrderedCollection with: topico1 with: topico2).
+	self assert: ((juan preguntasConTopico: topico1) size) equals: 2.
+	self assert: ((juan preguntasConTopico: topico2) size) equals: 1.
+	self assert: ((juan preguntasConTopico: topico3) size) equals: 0.
+]
+
+{ #category : #tests }
 UsuarioTest >> testPreguntasDeUsuariosQueSigue [
    | pregunta |
 	
@@ -119,5 +129,7 @@ UsuarioTest >> testSeguirA [
 	self assert: pepe usuariosQueSigue isEmpty.
 	pepe seguirA: flor.
 	self deny: pepe usuariosQueSigue isEmpty.
+	pepe seguirA: flor.
+	self assert: (pepe usuariosQueSigue) size equals: 1.
 	
 ]
