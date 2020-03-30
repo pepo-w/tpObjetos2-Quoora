@@ -43,22 +43,6 @@ CuooraTest >> testObtenerPreguntasConTopico [
 ]
 
 { #category : #tests }
-CuooraTest >> testObtenerPreguntasDe [
-	self assert: (sistema obtenerPreguntasDe: juan) isEmpty.
-	juan crearPreguntaConTitulo: 'titulo 1' descripcion: 'descripcion 1' topicosAsociados: (OrderedCollection with: topico1).
-	self assert: (sistema obtenerPreguntasDe: juan) size equals: 1.
-]
-
-{ #category : #tests }
-CuooraTest >> testObtenerRespuestasDe [
-	|pregunta|
-	pregunta := pepe crearPreguntaConTitulo: 'titulo' descripcion: 'descripcion' topicosAsociados: (OrderedCollection with: topico1). 
-	self assert: (sistema obtenerRespuestasDe: juan) isEmpty.
-	juan crearRespuestaConTexto: 'respondo a la pregunta de pepe' paraPregunta: pregunta. 
-	self assert: (sistema obtenerRespuestasDe: juan) size equals: 1.
-]
-
-{ #category : #tests }
 CuooraTest >> testPreguntasRelevantesParaElUsuario [ 
 	|pregunta|
 	juan := sistema registrarUsuarioConNombre: 'juan' password: '1234'.

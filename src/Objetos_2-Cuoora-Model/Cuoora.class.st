@@ -35,16 +35,6 @@ Cuoora >> obtenerPreguntasConTopico: unTopico [
 ]
 
 { #category : #accessing }
-Cuoora >> obtenerPreguntasDe: unUsuario [
-	^unUsuario preguntas.
-]
-
-{ #category : #accesing }
-Cuoora >> obtenerRespuestasDe: unUsuario [
-	^ unUsuario respuestas.
-]
-
-{ #category : #accessing }
 Cuoora >> preguntasRelevantesParaElUsuario: unUsuario [
 	|relevantes|
 	relevantes := unUsuario preguntasDeUsuariosQueSigue.
