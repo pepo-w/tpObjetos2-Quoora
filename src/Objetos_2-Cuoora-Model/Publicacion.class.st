@@ -22,7 +22,7 @@ Publicacion >> autor [
 
 { #category : #calculating }
 Publicacion >> diferenciaLikes [
-	^ (likes size - dislikes size).
+	^ ((likes size) - (dislikes size)).
 ]
 
 { #category : #private }
@@ -36,6 +36,8 @@ Publicacion >> eliminarReaccionDe: unUsuario deLaColeccion: unaColeccion [
 Publicacion >> initConAutor: unUsuario [
 	autor := unUsuario.
 	fechaYHora := DateAndTime now.
+	likes:= OrderedCollection new.
+	dislikes:= OrderedCollection new.
 ]
 
 { #category : #abstract }

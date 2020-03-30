@@ -56,8 +56,25 @@ UsuarioTest >> testBorrarPregunta [
 ]
 
 { #category : #tests }
-UsuarioTest >> testBorrarRespuesta [
-	1 = 2
+UsuarioTest >> testCalcularPuntaje [ 
+	| pregunta respuesta |
+	pregunta := flor crearPreguntaConTitulo: 'una pregunta de flor' descripcion: 'blablabla' topicosAsociados: (OrderedCollection with: topico1 with: topico2). 
+	self assert: flor calcularPuntaje equals: 20.
+	respuesta := flor crearRespuestaConTexto: 'se responde a si misma, esto no deberia sumar puntos' paraPregunta: pregunta.
+	"el siguiente dislike tampoco deberia restar"
+	respuesta registrarDislikeDe: pepe.
+	self assert: flor calcularPuntaje equals: 20.
+	pregunta := pepe crearPreguntaConTitulo: 'titulo de pepe' descripcion: 'descripcion de pepe' topicosAsociados: (OrderedCollection with: topico1).
+	self assert: pepe calcularPuntaje equals: 20.
+	respuesta := flor crearRespuestaConTexto: 'un texto' paraPregunta: pregunta.
+	respuesta registrarLikeDe: pepe.
+	respuesta registrarLikeDe: juan.
+	self assert: flor calcularPuntaje equals: 72.
+	respuesta:= juan crearRespuestaConTexto: 'respuesta polemica de juan' paraPregunta: pregunta.
+	respuesta registrarDislikeDe: flor.
+	respuesta registrarLikeDe: juan.
+	self assert: juan calcularPuntaje equals: 50.
+	
 ]
 
 { #category : #tests }
