@@ -16,13 +16,11 @@ Respuesta class >> conTexto: unTexto autor: unUsuario pregunta: unaPregunta [
 { #category : #deleting }
 Respuesta >> eliminate [ 
 	autor borrarRespuesta: self.
-	"comentario"
 ]
 
 { #category : #boolean }
 Respuesta >> esDistintoAutorQueLaPregunta [
 	^ self autor ~= pregunta autor.
-	"comentario"
 ]
 
 { #category : #initialization }

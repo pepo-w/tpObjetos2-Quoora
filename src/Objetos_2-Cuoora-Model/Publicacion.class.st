@@ -12,25 +12,21 @@ Class {
 
 { #category : #private }
 Publicacion >> agregarReaccionDe: unUsuario aLaColeccion: unaColeccion [
-"comentario"
 	unaColeccion detect: [ :reaccion | reaccion esDelAutor: unUsuario ] ifFound: [ ^nil ] ifNone: [ unaColeccion add: (Reaccion conAutor: unUsuario) ].
 ]
 
 { #category : #accessing }
 Publicacion >> autor [
-"comentario"
 	^autor
 ]
 
 { #category : #calculating }
 Publicacion >> diferenciaLikes [
-"comentario"
 	^ (likes size - dislikes size).
 ]
 
 { #category : #private }
 Publicacion >> eliminarReaccionDe: unUsuario deLaColeccion: unaColeccion [ 
-"comentario"
 	| reaccion |
 	reaccion:= unaColeccion detect: [ :each | each esDelAutor: unUsuario ] ifNone: [nil].
 	reaccion ifNotNil: [ unaColeccion remove: reaccion ].
@@ -49,14 +45,12 @@ Publicacion >> puntaje [
 
 { #category : #adding }
 Publicacion >> registrarDislikeDe: unUsuario [
-"comentario"
 	self agregarReaccionDe: unUsuario aLaColeccion: dislikes.
 	self eliminarReaccionDe: unUsuario deLaColeccion: likes.
 ]
 
 { #category : #adding }
 Publicacion >> registrarLikeDe: unUsuario [
-"comentario"
 	self agregarReaccionDe: unUsuario aLaColeccion: likes.
 	self eliminarReaccionDe: unUsuario deLaColeccion: dislikes.
 ]
