@@ -100,3 +100,8 @@ Usuario >> seguirA: otroUsuario [
 Usuario >> topicosDeInteres [
 	^ topicosDeInteres copy.
 ]
+
+{ #category : #'private - testing' }
+Usuario >> usuariosQueSigue [
+	^usuariosQueSigue.
+]

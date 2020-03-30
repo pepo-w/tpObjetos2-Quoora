@@ -2,17 +2,105 @@ Class {
 	#name : #UsuarioTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'usuario1',
-		'usuario2',
-		'usuario3'
+		'pepe',
+		'juan',
+		'flor',
+		'topico1',
+		'topico2',
+		'topico3'
 	],
 	#category : #'Objetos_2-Cuoora-Tests'
 }
 
 { #category : #'test-initialization' }
 UsuarioTest >> setUp [
-	usuario1 := Usuario conNombre: 'pepe' password: '1234'.
-	usuario2 := Usuario conNombre: 'juan' password: '5678'.
-	usuario3 := Usuario conNombre: 'flor' password: 'abcd'.
+	pepe := Usuario conNombre: 'pepe' password: '1234'.
+	juan := Usuario conNombre: 'juan' password: '5678'.
+	flor := Usuario conNombre: 'flor' password: 'abcd'.
+	
+	topico1:= Topico conNombre: 'topico1' descripcion: 'descripcion1'.
+	topico2:= Topico conNombre: 'topico2' descripcion: 'descripcion2'.
+	topico3:= Topico conNombre: 'topico3' descripcion: 'descripcion3'. 
+	
+	
 
+]
+
+{ #category : #tests }
+UsuarioTest >> testAgregarTopicoDeInteres [
+	self assert: juan topicosDeInteres isEmpty.
+	juan agregarTopicoDeInteres: topico1.
+	self assert: (juan topicosDeInteres size) equals: 1.
+	
+]
+
+{ #category : #tests }
+UsuarioTest >> testBorrarPregunta [
+	| pregunta |
+	
+	pregunta:=pepe crearPreguntaConTitulo: 'un titulo' descripcion: 'blablabla' topicosAsociados: (OrderedCollection with:topico1 with:topico3).
+	flor crearRespuestaConTexto: 'hola te respondo' paraPregunta: pregunta.
+	juan crearRespuestaConTexto: 'hola yo tambien te respondo pepe querido' paraPregunta: pregunta.
+	flor crearRespuestaConTexto: 'la primer rta que di no me convencio' paraPregunta: pregunta.
+		
+	self assert: (pepe preguntas size) equals: 1. 
+	self assert: (flor respuestas size) equals: 2.
+	self assert: (juan respuestas size) equals: 1.
+	
+	pepe borrarPregunta: pregunta.
+	
+	self assert: pepe preguntas isEmpty.
+	self assert: flor respuestas isEmpty.
+	self assert: juan respuestas isEmpty.	
+	
+]
+
+{ #category : #tests }
+UsuarioTest >> testBorrarRespuesta [
+	1 = 2
+]
+
+{ #category : #tests }
+UsuarioTest >> testCrearPregunta [
+   | topicos |
+	topicos := OrderedCollection with: topico1 with: topico2. 
+	self assert: juan preguntas isEmpty.
+	juan crearPreguntaConTitulo: 'un titulo' descripcion: 'no se me ocurren ideas para los tests' topicosAsociados: topicos.
+	self deny: juan preguntas isEmpty.
+	
+]
+
+{ #category : #tests }
+UsuarioTest >> testCrearRespuesta [
+	| pregunta |
+	pregunta := pepe crearPreguntaConTitulo: 'un titulo' descripcion: 'una descripcion'  topicosAsociados: (OrderedCollection with: topico1).
+	juan crearRespuestaConTexto: 'esto es una respuesta' paraPregunta: pregunta.
+	self assert: (juan respuestas size) equals: 1.
+	 
+]
+
+{ #category : #tests }
+UsuarioTest >> testPreguntasDeUsuariosQueSigue [
+   | pregunta |
+	
+	pepe seguirA: flor.
+	juan crearPreguntaConTitulo: 'una pregunta de juan' descripcion: 'descripcion' topicosAsociados: (OrderedCollection with:topico1).
+	flor crearPreguntaConTitulo: 'una pregunta de flor' descripcion: 'descripcion' topicosAsociados: (OrderedCollection with:topico1).
+	flor crearPreguntaConTitulo: 'otra pregunta de flor' descripcion: 'descripcion' topicosAsociados: (OrderedCollection with: topico2).
+	self assert: (pepe preguntasDeUsuariosQueSigue size) equals: 2.
+	
+	pregunta := flor crearPreguntaConTitulo: 'una tercer pregunta de flor' descripcion: 'descripcion' topicosAsociados: (OrderedCollection with:topico3).
+	self assert: (pepe preguntasDeUsuariosQueSigue size) equals: 3.
+	
+	flor borrarPregunta: pregunta.
+	self assert: (pepe preguntasDeUsuariosQueSigue size) equals: 2.
+	
+]
+
+{ #category : #tests }
+UsuarioTest >> testSeguirA [
+	self assert: pepe usuariosQueSigue isEmpty.
+	pepe seguirA: flor.
+	self deny: pepe usuariosQueSigue isEmpty.
+	
 ]

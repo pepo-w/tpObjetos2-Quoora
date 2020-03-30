@@ -47,3 +47,13 @@ Cuoora >> preguntasRelevantesParaElUsuario: unUsuario [
 Cuoora >> registrarUsuarioConNombre: unNombre password: unPassword [
 	^ (usuarios add: (Usuario conNombre: unNombre password: unPassword)).
 ]
+
+{ #category : #'private - testing' }
+Cuoora >> topicos [
+	^topicos copy.
+]
+
+{ #category : #'private - testing' }
+Cuoora >> usuarios [
+	^usuarios copy.
+]
