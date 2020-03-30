@@ -24,7 +24,7 @@ CuooraTest >> setUp [
 ]
 
 { #category : #tests }
-CuooraTest >> testAgregarTopico [ 
+CuooraTest >> testAgregarTopicoConNombredescripcion [
 	self assert: sistema topicos isEmpty.
 	sistema agregarTopicoConNombre: 'topico1' descripcion: 'descripcion 1'. 
 	self assert: (sistema topicos size) equals: 1.
@@ -80,7 +80,7 @@ CuooraTest >> testPreguntasRelevantesParaElUsuario [
 ]
 
 { #category : #tests }
-CuooraTest >> testRegistrarUsuario [
+CuooraTest >> testRegistrarUsuarioConNombrepassword [
 	self assert: sistema usuarios isEmpty.
 	sistema registrarUsuarioConNombre: 'juan' password: '1234'.
 	self assert: (sistema usuarios) size equals: 1.

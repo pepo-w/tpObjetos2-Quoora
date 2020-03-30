@@ -79,7 +79,7 @@ UsuarioTest >> testCalcularPuntaje [
 ]
 
 { #category : #tests }
-UsuarioTest >> testCrearPregunta [
+UsuarioTest >> testCrearPreguntaConTitulodescripciontopicosAsociados [
    | topicos |
 	topicos := OrderedCollection with: topico1 with: topico2. 
 	self assert: juan preguntas isEmpty.
@@ -89,7 +89,7 @@ UsuarioTest >> testCrearPregunta [
 ]
 
 { #category : #tests }
-UsuarioTest >> testCrearRespuesta [
+UsuarioTest >> testCrearRespuestaConTextoparaPregunta [
 	| pregunta |
 	pregunta := pepe crearPreguntaConTitulo: 'un titulo' descripcion: 'una descripcion'  topicosAsociados: (OrderedCollection with: topico1).
 	juan crearRespuestaConTexto: 'esto es una respuesta' paraPregunta: pregunta.
