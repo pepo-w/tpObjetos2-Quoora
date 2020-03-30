@@ -59,6 +59,27 @@ CuooraTest >> testObtenerRespuestasDe [
 ]
 
 { #category : #tests }
+CuooraTest >> testPreguntasRelevantesParaElUsuario [ 
+	|pregunta|
+	juan := sistema registrarUsuarioConNombre: 'juan' password: '1234'.
+	pepe := sistema registrarUsuarioConNombre: 'pepe' password: '5678'.
+	pregunta := pepe crearPreguntaConTitulo: 'pregunta de pepe' descripcion: 'con topico1' topicosAsociados: (OrderedCollection with: topico1).
+	juan crearPreguntaConTitulo: 'pregunta de juan' descripcion: 'con topico2' topicosAsociados: (OrderedCollection with: topico2).
+	self assert: (sistema preguntasRelevantesParaElUsuario: juan) isEmpty.
+	juan agregarTopicoDeInteres: topico2. 
+	"ahora la pregunta de juan es relevante porque tiene un topico de interes"
+	self assert: (sistema preguntasRelevantesParaElUsuario: juan) size equals: 1.
+	juan seguirA: pepe.
+	"ahora la pregunta de pepe es relevante porque lo sigue"
+	self assert: (sistema preguntasRelevantesParaElUsuario: juan) size equals: 2.
+	juan agregarTopicoDeInteres: topico1. 
+	"este caso comprueba que la coleccion que retorna el metodo no tenga preguntas repetidas"
+	self assert: (sistema preguntasRelevantesParaElUsuario: juan) size equals: 2.
+	pepe borrarPregunta: pregunta.
+	self assert: (sistema preguntasRelevantesParaElUsuario: juan) size equals: 1.
+]
+
+{ #category : #tests }
 CuooraTest >> testRegistrarUsuario [
 	self assert: sistema usuarios isEmpty.
 	sistema registrarUsuarioConNombre: 'juan' password: '1234'.
