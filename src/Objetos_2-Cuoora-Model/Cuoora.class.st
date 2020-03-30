@@ -5,8 +5,18 @@ Class {
 		'usuarios',
 		'topicos'
 	],
+	#classInstVars : [
+		'sistemaUnico'
+	],
 	#category : #'Objetos_2-Cuoora-Model'
 }
+
+{ #category : #accessing }
+Cuoora class >> sistemaUnico [
+	"implementacion para singleton. si Cuoora se instancia con el mensaje sistemaUnico en vez de new, solo existira una instancia referenciada por la variable de clase sistemaUnico"
+	sistemaUnico ifNil: [ sistemaUnico := self new ].
+	^ sistemaUnico.
+]
 
 { #category : #adding }
 Cuoora >> agregarTopicoConNombre: unNombre descripcion: unaDescripcion [

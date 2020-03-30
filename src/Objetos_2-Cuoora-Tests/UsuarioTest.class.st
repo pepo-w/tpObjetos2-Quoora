@@ -103,7 +103,7 @@ UsuarioTest >> testPreguntasConTopico [
 	juan crearPreguntaConTitulo: 'otro titulo' descripcion: 'pregunta con topicos 1 y 2' topicosAsociados: (OrderedCollection with: topico1 with: topico2).
 	self assert: ((juan preguntasConTopico: topico1) size) equals: 2.
 	self assert: ((juan preguntasConTopico: topico2) size) equals: 1.
-	self assert: ((juan preguntasConTopico: topico3) size) equals: 0.
+	self assert: (juan preguntasConTopico: topico3) isEmpty.
 ]
 
 { #category : #tests }

@@ -78,7 +78,7 @@ Usuario >> preguntas [
 
 { #category : #accessing }
 Usuario >> preguntasConTopico: unTopico [ 
-	^ preguntas select: [ :each | each incluyeTopico: unTopico  ].
+	^ preguntas select: [ :each | each incluyeTopico: unTopico ].
 ]
 
 { #category : #accessing }
