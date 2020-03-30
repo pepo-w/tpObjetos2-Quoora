@@ -7,7 +7,7 @@ Class {
 		'likes',
 		'dislikes'
 	],
-	#category : #'Objetos_2-Cuoora-Model-Objetos_2-Cuoora-Model'
+	#category : #'Objetos_2-Cuoora-Model'
 }
 
 { #category : #private }
