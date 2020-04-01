@@ -42,6 +42,11 @@ Publicacion >> eliminarReaccionDe: unUsuario deLaColeccion: unaColeccion [
 	reaccion ifNotNil: [ unaColeccion remove: reaccion ].
 ]
 
+{ #category : #accessing }
+Publicacion >> fechaYHora [ 
+	^fechaYHora.
+]
+
 { #category : #initialization }
 Publicacion >> initConAutor: unUsuario [
 	autor := unUsuario.
