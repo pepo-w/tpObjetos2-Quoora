@@ -20,9 +20,19 @@ Publicacion >> autor [
 	^autor
 ]
 
+{ #category : #private }
+Publicacion >> cantDislikes [
+	^dislikes size.
+]
+
+{ #category : #private }
+Publicacion >> cantLikes [
+	^likes size.
+]
+
 { #category : #calculating }
 Publicacion >> diferenciaLikes [
-	^ ((likes size) - (dislikes size)).
+	^ (self cantLikes) - (self cantDislikes).
 ]
 
 { #category : #private }
