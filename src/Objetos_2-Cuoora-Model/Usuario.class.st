@@ -20,13 +20,11 @@ Usuario class >> conNombre: unNombre password: unPassword [
 
 { #category : #adding }
 Usuario >> agregarTopicoDeInteres: unTopico [
-"el no agregar topicos repetidos se podria implementar desde la interfaz"
 	topicosDeInteres addIfNotPresent: unTopico.
 ]
 
 { #category : #deleting }
 Usuario >> borrarPregunta: unaPregunta [ 
-	"todavia me quedan algunas dudas con el tema de borrado, habría que chequear bien despues el mecanismo"
 	unaPregunta borrarRespuestas.
 	preguntas remove: unaPregunta.
 ]
@@ -39,7 +37,7 @@ Usuario >> borrarRespuesta: unaRespuesta [
 
 { #category : #calculating }
 Usuario >> calcularPuntaje [
-	"Se tienen encuenta todas las preguntas del usuario y todas las respuestas validas, osea las que responden a una pregunta que no hizo el mismo"
+	"Se tienen en cuenta todas las preguntas del usuario y todas las respuestas validas, osea las que responden a una pregunta que no hizo el mismo"
 	| puntajePreguntas respuestasValidas |
 	puntajePreguntas := preguntas sumNumbers: [ :each | each puntaje ].
 	respuestasValidas := respuestas select: [ :each | each esDistintoAutorQueLaPregunta ].
@@ -93,7 +91,6 @@ Usuario >> respuestas [
 
 { #category : #adding }
 Usuario >> seguirA: otroUsuario [
-"el no agregar followers repetidos se podria implementar desde la interfaz"
 	usuariosQueSigue addIfNotPresent: otroUsuario.
 ]
 

@@ -30,7 +30,6 @@ PreguntaTest >> testIncluyeTopico [
 
 { #category : #tests }
 PreguntaTest >> testPuntaje [
-"el test de puntaje para la respuesta seria basicamente lo mismo, no se si son necesarios ambos"
 	| usuario pregunta |
 	usuario := Usuario conNombre: 'Jose' password: 'acbd'.
 	pregunta := usuario crearPreguntaConTitulo: 'un titulo' descripcion: 'una descripcion' topicosAsociados: (OrderedCollection new).

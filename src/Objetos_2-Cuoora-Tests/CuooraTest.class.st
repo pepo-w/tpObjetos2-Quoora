@@ -56,6 +56,8 @@ CuooraTest >> testPreguntasRelevantesParaElUsuario [
 	juan seguirA: pepe.
 	"ahora la pregunta de pepe es relevante porque lo sigue"
 	self assert: (sistema preguntasRelevantesParaElUsuario: juan) size equals: 2.
+	"la pregunta de juan deberia estar primero porque es mas reciente"
+	self assert: (sistema preguntasRelevantesParaElUsuario: juan) last equals: pregunta.
 	juan agregarTopicoDeInteres: topico1. 
 	"este caso comprueba que la coleccion que retorna el metodo no tenga preguntas repetidas"
 	self assert: (sistema preguntasRelevantesParaElUsuario: juan) size equals: 2.

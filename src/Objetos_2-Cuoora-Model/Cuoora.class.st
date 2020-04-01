@@ -25,6 +25,7 @@ Cuoora class >> unicaInstancia [
 
 { #category : #adding }
 Cuoora >> agregarTopicoConNombre: unNombre descripcion: unaDescripcion [
+"deberia verificar que no se repita el topico??"
 	^ (topicos add: (Topico conNombre: unNombre descripcion: unaDescripcion)).
 ]
 
@@ -41,15 +42,18 @@ Cuoora >> obtenerPreguntasConTopico: unTopico [
 
 { #category : #accessing }
 Cuoora >> preguntasRelevantesParaElUsuario: unUsuario [
+"las retorna ordenadas segun fecha de creacion (primero las mas nuevas)."
+"el tema de mostrar solo las 5 ultimas capas es mejor resolverlo desde seaside"
 	|relevantes|
 	relevantes := unUsuario preguntasDeUsuariosQueSigue.
 	unUsuario topicosDeInteres do: [ :each | relevantes addAll: (self obtenerPreguntasConTopico: each) ].
-	^relevantes asSet.
+	^ (relevantes asSet) asSortedCollection: [ :unaPreg :otraPreg | unaPreg fechaYHora > otraPreg fechaYHora ].
 
 ]
 
 { #category : #adding }
 Cuoora >> registrarUsuarioConNombre: unNombre password: unPassword [
+"deberia verificar que no se repita el nombre de usuario??"
 	^ (usuarios add: (Usuario conNombre: unNombre password: unPassword)).
 ]
 

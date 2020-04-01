@@ -25,6 +25,12 @@ Pregunta >> borrarRespuestas [
 	respuestas do: [ :each | each eliminate ].
 ]
 
+{ #category : #accessing }
+Pregunta >> fechaYHora [
+"para poder ordenar las preguntas relevantes segun su fecha de creacion"
+	^ fechaYHora.
+]
+
 { #category : #boolean }
 Pregunta >> incluyeTopico: unTopico [
 	^ topicosAsociados includes: unTopico.
