@@ -27,4 +27,7 @@ CuooraHomeComponent >> renderContentOn: aCanvas [
 	aCanvas
 		unorderedList: [ (sistema preguntasRelevantesParaElUsuario: usuario)
 				do: [ :each | aCanvas listItem: each titulo ] ].
+	aCanvas button
+				callback: [  ];
+				with: 'Hacer una pregunta'.
 ]
