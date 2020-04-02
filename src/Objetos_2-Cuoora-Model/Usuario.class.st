@@ -70,6 +70,11 @@ Usuario >> initConNombre: unNombre password: unPassword [
 ]
 
 { #category : #accessing }
+Usuario >> nombre [ 
+	^ nombre.
+]
+
+{ #category : #accessing }
 Usuario >> preguntas [ 
 	^ preguntas copy.
 ]

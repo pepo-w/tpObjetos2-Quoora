@@ -48,3 +48,8 @@ Pregunta >> puntaje [
 Pregunta >> respuestas [
 	^ respuestas asSortedCollection: [ :unaRta :otraRta | unaRta diferenciaLikes > otraRta diferenciaLikes ].
 ]
+
+{ #category : #accessing }
+Pregunta >> titulo [
+	^ titulo.
+]
