@@ -1,6 +1,11 @@
 "
 ""para registrar el component""
-WAAdmin register: CuooraLoginComponent asApplicationAt: 'cuoora'. 
+  | application |
+    application := WAAdmin register: CuooraLoginComponent asApplicationAt: 'cuoora'.
+    application preferenceAt: #sessionClass put: CuooraSession.
+
+""para limpiar la unica instancia de Cuoora""
+Cuoora clearUnicaInstancia.
 "
 Class {
 	#name : #CuooraLoginComponent,

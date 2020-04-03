@@ -18,11 +18,18 @@ Cuoora class >> clearUnicaInstancia [
 
 { #category : #'as yet unclassified' }
 Cuoora class >> prebuiltInstance [
-	| cuoora |
+	| cuoora daniel maria jose topico1|
 	cuoora := self new.
-	cuoora registrarUsuarioConNombre: 'daniel' password: '12345'.
-	cuoora registrarUsuarioConNombre: 'maria' password: '12345'.
-	cuoora registrarUsuarioConNombre: 'jose' password: '12345'.
+	topico1 := cuoora agregarTopicoConNombre: 'topico1' descripcion: 'primer topico'.
+	daniel := cuoora registrarUsuarioConNombre: 'daniel' password: '12345'.
+	maria := cuoora registrarUsuarioConNombre: 'maria' password: '12345'.
+	jose := cuoora registrarUsuarioConNombre: 'jose' password: '12345'.
+	daniel seguirA: jose.
+	jose crearPreguntaConTitulo: 'pregunta de jose. relevante para daniel' descripcion: 'soy jose' topicosAsociados: (OrderedCollection new).
+	maria seguirA: daniel.
+	daniel crearPreguntaConTitulo: 'pregunta de daniel. relevante para maria' descripcion: 'soy daniel' topicosAsociados: (OrderedCollection new). 
+	daniel agregarTopicoDeInteres: topico1.
+	maria crearPreguntaConTitulo: 'pregunta de maria. relevante para daniel por topico1' descripcion: 'soy maria' topicosAsociados: (OrderedCollection with: topico1). 
 	^cuoora.
 ]
 
