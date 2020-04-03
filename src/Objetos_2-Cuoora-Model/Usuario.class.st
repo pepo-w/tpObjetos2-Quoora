@@ -75,6 +75,11 @@ Usuario >> nombre [
 ]
 
 { #category : #accessing }
+Usuario >> password [
+	^password
+]
+
+{ #category : #accessing }
 Usuario >> preguntas [ 
 	^ preguntas copy.
 ]

@@ -24,9 +24,15 @@ CuooraLoginComponent >> nombre: anObject [
 
 { #category : #callbacks }
 CuooraLoginComponent >> nuevaSesion [
-	| home |
-	home := CuooraHomeComponent conCombre: nombre password: password.
-	self call: home.
+	| user sistema home|
+	sistema := Cuoora unicaInstancia.
+	user := sistema buscarUsuarioConNombre: self nombre yPassword: self password.
+	self session login: user.
+	user ifNil: [ self inform: 'Datos invalidos' ]
+		  ifNotNil: [ home := CuooraHomeComponent new.
+						  self call: home	]
+		  
+	
 ]
 
 { #category : #accessing }
@@ -42,7 +48,7 @@ CuooraLoginComponent >> password: anObject [
 { #category : #rendering }
 CuooraLoginComponent >> renderContentOn: aCanvas [
 	aCanvas heading level: 1; with: 'Cuoora'.
-	aCanvas
+		aCanvas
 		form: [ aCanvas
 				paragraph: [ aCanvas label: 'Usuario: '.
 					aCanvas textInput on: #nombre of: self ].
@@ -52,4 +58,5 @@ CuooraLoginComponent >> renderContentOn: aCanvas [
 			aCanvas button
 				callback: [ self nuevaSesion ];
 				with: 'Iniciar sesion' ]
+			
 ]
