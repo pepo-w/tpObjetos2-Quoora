@@ -22,11 +22,10 @@ CuooraHomeComponent >> initialize [
 { #category : #rendering }
 CuooraHomeComponent >> renderContentOn: aCanvas [
 	self renderHeaderOn: aCanvas.
-	aCanvas paragraph: 'Pagina principal'.
-	aCanvas paragraph: 'Preguntas relevantes para el usuario: ', self session user nombre.
-	aCanvas
-		unorderedList: [ (sistema preguntasRelevantesParaElUsuario: self session user)
-				do: [ :each | aCanvas listItem: each titulo ] ].
+	aCanvas heading
+		level: 2;
+		with: 'Ultimas Preguntas'.
+	(sistema preguntasRelevantesParaElUsuario: self session user) do: [ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ].
 	aCanvas button
 				callback: [  ];
 				with: 'Hacer una pregunta'.
@@ -36,10 +35,25 @@ CuooraHomeComponent >> renderContentOn: aCanvas [
 CuooraHomeComponent >> renderHeaderOn: aCanvas [
 	aCanvas div 
 		class: 'right';
-		with: [aCanvas paragraph: [ aCanvas render: self session user nombre, ' | '.  
+		with: [aCanvas paragraph: [ aCanvas strong: self session user nombre, ' '.  
 								aCanvas anchor callback: [self cerrarSesion];
 								               with: 'logout']].	
 	aCanvas heading: 'CuOOra'.
+	aCanvas horizontalRule
+]
+
+{ #category : #rendering }
+CuooraHomeComponent >> renderRelevantQuestion: aQuestion on: aCanvas [
+	aCanvas heading
+		level: 3;
+		with: aQuestion titulo.
+	aCanvas
+		paragraph: [ aCanvas render: 'Realizada por '.
+			aCanvas strong: aQuestion autor nombre. 
+			aCanvas render: ' | '.
+			aCanvas render: (aQuestion respuestas size) asString,' respuestas '.
+			aCanvas break.
+			aCanvas render: (aQuestion cantLikes) asString,' likes | ',(aQuestion cantDislikes) asString, ' dislikes'].
 	aCanvas horizontalRule
 ]
 
