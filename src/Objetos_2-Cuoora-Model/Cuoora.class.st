@@ -65,8 +65,7 @@ Cuoora >> obtenerPreguntasConTopico: unTopico [
 
 { #category : #accessing }
 Cuoora >> preguntasRelevantesParaElUsuario: unUsuario [
-"las retorna ordenadas segun fecha de creacion (primero las mas nuevas)."
-"el tema de mostrar solo las 5 ultimas capas es mejor resolverlo desde seaside"
+"retorna las preguntas relevantes ordenadas por fecha y hora, sin ocurrencias"
 	|relevantes|
 	relevantes := unUsuario preguntasDeUsuariosQueSigue.
 	unUsuario topicosDeInteres do: [ :each | relevantes addAll: (self obtenerPreguntasConTopico: each) ].
@@ -83,6 +82,16 @@ Cuoora >> registrarUsuarioConNombre: unNombre password: unPassword [
 { #category : #'private - testing' }
 Cuoora >> topicos [
 	^topicos copy.
+]
+
+{ #category : #accessing }
+Cuoora >> ultimasPreguntasRelevantesParaElUsuario: unUsuario [
+	"retorna las primeras 5 preguntas relevantes, ordenadas por fecha y hora, sin ocurrencias"
+	|relevantes|
+	relevantes := self preguntasRelevantesParaElUsuario: unUsuario.
+	(relevantes size > 5)
+	ifTrue: [ ^ relevantes first: 5 ].
+	^ relevantes.
 ]
 
 { #category : #'private - testing' }

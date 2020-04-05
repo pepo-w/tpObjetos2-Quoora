@@ -25,7 +25,7 @@ CuooraHomeComponent >> renderContentOn: aCanvas [
 	aCanvas heading
 		level: 2;
 		with: 'Ultimas Preguntas'.
-	(sistema preguntasRelevantesParaElUsuario: self session user) do: [ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ].
+	(sistema ultimasPreguntasRelevantesParaElUsuario: self session user) do: [ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ].
 	aCanvas button
 				callback: [  ];
 				with: 'Hacer una pregunta'.
