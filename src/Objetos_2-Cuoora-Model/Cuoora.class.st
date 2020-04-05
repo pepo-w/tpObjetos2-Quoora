@@ -20,7 +20,10 @@ Cuoora class >> clearUnicaInstancia [
 Cuoora class >> prebuiltInstance [
 	| cuoora daniel maria jose topico1|
 	cuoora := self new.
-	topico1 := cuoora agregarTopicoConNombre: 'topico1' descripcion: 'primer topico'.
+	topico1 := cuoora agregarTopicoConNombre: 'informatica' descripcion: 'primer topico'.
+	cuoora agregarTopicoConNombre: 'tecnologia' descripcion: 'segundo topico'.
+	cuoora agregarTopicoConNombre: 'deportes' descripcion: 'tercer topico'.
+	cuoora agregarTopicoConNombre: 'videojuegos' descripcion: 'cuarto topico'.
 	daniel := cuoora registrarUsuarioConNombre: 'daniel' password: '12345'.
 	maria := cuoora registrarUsuarioConNombre: 'maria' password: '12345'.
 	jose := cuoora registrarUsuarioConNombre: 'jose' password: '12345'.

@@ -7,10 +7,16 @@ Class {
 	#category : #'Objetos_2-Cuoora-UI'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #callbacks }
 CuooraHomeComponent >> cerrarSesion [
 	self session logout.
 	self answer.
+]
+
+{ #category : #callbacks }
+CuooraHomeComponent >> crearPregunta [
+	self call: (CuooraQuestionEditorComponent new).
+	
 ]
 
 { #category : #initialization }
@@ -26,8 +32,8 @@ CuooraHomeComponent >> renderContentOn: aCanvas [
 		level: 2;
 		with: 'Ultimas Preguntas'.
 	(sistema ultimasPreguntasRelevantesParaElUsuario: self session user) do: [ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ].
-	aCanvas button
-				callback: [  ];
+	aCanvas anchor
+				callback: [ self crearPregunta ];
 				with: 'Hacer una pregunta'.
 ]
 
