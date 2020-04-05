@@ -15,7 +15,7 @@ CuooraHomeComponent >> cerrarSesion [
 
 { #category : #callbacks }
 CuooraHomeComponent >> crearPregunta [
-	self call: (CuooraQuestionEditorComponent new).
+	self call: (CuooraQuestionEditorComponent new topicos: (sistema topicos); yourself).
 	
 ]
 

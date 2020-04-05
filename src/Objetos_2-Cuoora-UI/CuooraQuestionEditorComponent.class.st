@@ -4,10 +4,16 @@ Class {
 	#instVars : [
 		'titulo',
 		'descripcion',
-		'topicos'
+		'topicos',
+		'topicosAsociados'
 	],
 	#category : #'Objetos_2-Cuoora-UI'
 }
+
+{ #category : #callbacks }
+CuooraQuestionEditorComponent >> agregarTopicoAsociado: aTopic [
+	topicosAsociados add: aTopic.
+]
 
 { #category : #callbacks }
 CuooraQuestionEditorComponent >> cancelar [
@@ -25,11 +31,33 @@ CuooraQuestionEditorComponent >> descripcion: anObject [
 ]
 
 { #category : #callbacks }
+CuooraQuestionEditorComponent >> eliminarTopicoAsociado: aTopic [
+	topicosAsociados remove: aTopic ifAbsent: nil.
+]
+
+{ #category : #initialization }
+CuooraQuestionEditorComponent >> initialize [ 
+	super initialize.
+	topicosAsociados := OrderedCollection new.
+]
+
+{ #category : #callbacks }
 CuooraQuestionEditorComponent >> nuevaPregunta [
 "aca habria que controlar que se hayan completado todos los campos?"
-topicos := OrderedCollection new.
-	self session user crearPreguntaConTitulo: titulo descripcion: descripcion topicosAsociados: topicos.
+	self session user crearPreguntaConTitulo: titulo descripcion: descripcion topicosAsociados: topicosAsociados.
 	self answer. 
+]
+
+{ #category : #rendering }
+CuooraQuestionEditorComponent >> renderCheckBoxOf: aTopic on: aCanvas [
+	aCanvas text: aTopic nombre.
+	aCanvas checkbox
+		value: false;
+		callback: [ :value | value  
+									 ifTrue: [ self agregarTopicoAsociado: aTopic ] 
+									 ifFalse: [self eliminarTopicoAsociado: aTopic]]. 
+	aCanvas space.
+		
 ]
 
 { #category : #rendering }
@@ -45,13 +73,21 @@ CuooraQuestionEditorComponent >> renderContentOn: aCanvas [
 					aCanvas textInput on: #descripcion of: self ].
 				
 				"aca estaria el dropdown para los topicos"
-				
+			self renderTopicsOn: aCanvas.
 			aCanvas submitButton 
 				callback: [ self nuevaPregunta ];
 				value: 'Crear pregunta'.
 			aCanvas submitButton 
 				callback: [ self cancelar ];
 				value: 'Cancelar' ].
+]
+
+{ #category : #rendering }
+CuooraQuestionEditorComponent >> renderTopicsOn: aCanvas [
+	aCanvas text: 'Topicos: '.
+	topicos do: [ :each | self renderCheckBoxOf: each on: aCanvas ].
+	aCanvas break.
+	aCanvas horizontalRule.
 ]
 
 { #category : #accessing }
@@ -62,11 +98,6 @@ CuooraQuestionEditorComponent >> titulo [
 { #category : #accessing }
 CuooraQuestionEditorComponent >> titulo: anObject [
 	titulo := anObject
-]
-
-{ #category : #accessing }
-CuooraQuestionEditorComponent >> topicos [
-	^ topicos
 ]
 
 { #category : #accessing }

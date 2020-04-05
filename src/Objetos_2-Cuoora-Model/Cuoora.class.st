@@ -18,21 +18,24 @@ Cuoora class >> clearUnicaInstancia [
 
 { #category : #'as yet unclassified' }
 Cuoora class >> prebuiltInstance [
-	| cuoora daniel maria jose topico1|
+	| cuoora daniel maria jose informatica deportes tecnologia|
 	cuoora := self new.
-	topico1 := cuoora agregarTopicoConNombre: 'informatica' descripcion: 'primer topico'.
-	cuoora agregarTopicoConNombre: 'tecnologia' descripcion: 'segundo topico'.
-	cuoora agregarTopicoConNombre: 'deportes' descripcion: 'tercer topico'.
+	informatica := cuoora agregarTopicoConNombre: 'informatica' descripcion: 'primer topico'.
+	deportes:= cuoora agregarTopicoConNombre: 'deportes' descripcion: 'tercer topico'.
+	tecnologia:= cuoora agregarTopicoConNombre: 'tecnologia' descripcion: 'segundo topico'.
 	cuoora agregarTopicoConNombre: 'videojuegos' descripcion: 'cuarto topico'.
 	daniel := cuoora registrarUsuarioConNombre: 'daniel' password: '12345'.
 	maria := cuoora registrarUsuarioConNombre: 'maria' password: '12345'.
 	jose := cuoora registrarUsuarioConNombre: 'jose' password: '12345'.
+	
 	daniel seguirA: jose.
-	jose crearPreguntaConTitulo: 'pregunta de jose. relevante para daniel' descripcion: 'soy jose' topicosAsociados: (OrderedCollection new).
 	maria seguirA: daniel.
-	daniel crearPreguntaConTitulo: 'pregunta de daniel. relevante para maria' descripcion: 'soy daniel' topicosAsociados: (OrderedCollection new). 
-	daniel agregarTopicoDeInteres: topico1.
-	maria crearPreguntaConTitulo: 'pregunta de maria. relevante para daniel por topico1' descripcion: 'soy maria' topicosAsociados: (OrderedCollection with: topico1). 
+	maria agregarTopicoDeInteres: deportes.
+	daniel agregarTopicoDeInteres: informatica.
+	jose agregarTopicoDeInteres: tecnologia.
+	jose crearPreguntaConTitulo: 'pregunta de jose. relevante para daniel y maria' descripcion: 'soy jose' topicosAsociados: (OrderedCollection with: deportes).
+	daniel crearPreguntaConTitulo: 'pregunta de daniel. relevante para maria' descripcion: 'soy daniel' topicosAsociados: (OrderedCollection with: tecnologia). 
+	maria crearPreguntaConTitulo: 'pregunta de maria. relevante para daniel por topico informatica' descripcion: 'soy maria' topicosAsociados: (OrderedCollection with: informatica). 
 	^cuoora.
 ]
 
