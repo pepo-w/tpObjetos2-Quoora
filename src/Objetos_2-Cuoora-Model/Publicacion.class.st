@@ -20,12 +20,12 @@ Publicacion >> autor [
 	^autor
 ]
 
-{ #category : #private }
+{ #category : #accessing }
 Publicacion >> cantDislikes [
 	^dislikes size.
 ]
 
-{ #category : #private }
+{ #category : #accessing }
 Publicacion >> cantLikes [
 	^likes size.
 ]

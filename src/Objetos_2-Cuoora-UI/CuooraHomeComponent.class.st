@@ -48,12 +48,19 @@ CuooraHomeComponent >> renderRelevantQuestion: aQuestion on: aCanvas [
 		level: 3;
 		with: aQuestion titulo.
 	aCanvas
-		paragraph: [ aCanvas render: 'Realizada por '.
-			aCanvas strong: aQuestion autor nombre. 
-			aCanvas render: ' | '.
-			aCanvas render: (aQuestion respuestas size) asString,' respuestas '.
+		paragraph: [ aCanvas render: 'Realizada por: '. 
+			aCanvas strong: aQuestion autor nombre. aCanvas render: ' | '.
+			aCanvas render: (aQuestion respuestas size) asString,' respuestas'.
 			aCanvas break.
-			aCanvas render: (aQuestion cantLikes) asString,' likes | ',(aQuestion cantDislikes) asString, ' dislikes'].
+			aCanvas render: (aQuestion cantLikes) asString,' likes | ',(aQuestion cantDislikes) asString, ' dislikes'.
+			aCanvas break.
+			aCanvas anchor 
+						callback: [aQuestion registrarLikeDe: self session user];
+						with: 'like '.
+			aCanvas space.
+			aCanvas anchor 
+						callback: [ aQuestion registrarDislikeDe: self session user ];
+						with: 'dislike'].
 	aCanvas horizontalRule
 ]
 
