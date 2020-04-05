@@ -20,6 +20,11 @@ CuooraQuestionEditorComponent >> cancelar [
 	self answer.
 ]
 
+{ #category : #boolean }
+CuooraQuestionEditorComponent >> datosInvalidos [
+	^ (self descripcion isEmpty or: [ self titulo isEmpty or: [topicosAsociados isEmpty]]).
+]
+
 { #category : #accessing }
 CuooraQuestionEditorComponent >> descripcion [
 	^ descripcion
@@ -43,9 +48,11 @@ CuooraQuestionEditorComponent >> initialize [
 
 { #category : #callbacks }
 CuooraQuestionEditorComponent >> nuevaPregunta [
-"aca habria que controlar que se hayan completado todos los campos?"
-	self session user crearPreguntaConTitulo: titulo descripcion: descripcion topicosAsociados: topicosAsociados.
-	self answer. 
+	(self datosInvalidos)
+		ifTrue: [ self inform: 'Debe completar todos los campos y seleccionar al menos 1 topico' ] 
+		ifFalse: [ self session user crearPreguntaConTitulo: titulo descripcion: descripcion topicosAsociados: topicosAsociados.
+					  self answer. ]. 
+
 ]
 
 { #category : #rendering }
@@ -62,29 +69,31 @@ CuooraQuestionEditorComponent >> renderCheckBoxOf: aTopic on: aCanvas [
 
 { #category : #rendering }
 CuooraQuestionEditorComponent >> renderContentOn: aCanvas [
-"Estaria bueno que tenga el mismo header que home"
-	aCanvas heading level: 1; with: 'Cuoora'.
-		aCanvas
+	"Estaria bueno que tenga el mismo header que home"
+	aCanvas heading
+		level: 1;
+		with: 'Cuoora'.
+	aCanvas
 		form: [ aCanvas
 				paragraph: [ aCanvas label: 'Titulo: '.
 					aCanvas textInput on: #titulo of: self ].
 			aCanvas
 				paragraph: [ aCanvas label: 'Descripción: '.
 					aCanvas textInput on: #descripcion of: self ].
-				
-				"aca estaria el dropdown para los topicos"
+
+			"aca estaria el dropdown para los topicos"
 			self renderTopicsOn: aCanvas.
-			aCanvas submitButton 
+			aCanvas submitButton
 				callback: [ self nuevaPregunta ];
 				value: 'Crear pregunta'.
-			aCanvas submitButton 
+			aCanvas submitButton
 				callback: [ self cancelar ];
-				value: 'Cancelar' ].
+				value: 'Cancelar' ]
 ]
 
 { #category : #rendering }
 CuooraQuestionEditorComponent >> renderTopicsOn: aCanvas [
-	aCanvas text: 'Topicos: '.
+	aCanvas strong: 'Topicos: '.
 	topicos do: [ :each | self renderCheckBoxOf: each on: aCanvas ].
 	aCanvas break.
 	aCanvas horizontalRule.
