@@ -26,12 +26,35 @@ CuooraHomeComponent >> initialize [
 ]
 
 { #category : #rendering }
+CuooraHomeComponent >> renderButtonOn: aCanvas [
+	aCanvas anchor
+		callback: [ self crearPregunta ];
+		with: [ aCanvas button: 'Hacer una nueva pregunta' ]
+]
+
+{ #category : #rendering }
 CuooraHomeComponent >> renderContentOn: aCanvas [
 	self renderHeaderOn: aCanvas.
 	self renderRelevantQuestionsOn: aCanvas.
-	aCanvas anchor
-				callback: [ self crearPregunta ];
-				with: [ aCanvas button: 'Hacer una pregunta'].
+	self renderButtonOn: aCanvas
+]
+
+{ #category : #rendering }
+CuooraHomeComponent >> renderDataOf: aQuestion on: aCanvas [
+	aCanvas render: 'Topicos asociados: '.
+	(aQuestion topicosAsociados) 
+		do: [ :each | aCanvas render: each nombre,'. ' ].
+	aCanvas break.
+	aCanvas render: 'Realizada por: '.
+	aCanvas strong: aQuestion autor nombre.
+	aCanvas render: ' | '.
+	aCanvas render: aQuestion respuestas size asString , ' respuestas'.
+	aCanvas break.
+	aCanvas
+		render:
+			aQuestion cantLikes asString , ' likes | '
+				, aQuestion cantDislikes asString , ' dislikes'.
+	aCanvas break
 ]
 
 { #category : #rendering }
@@ -48,24 +71,24 @@ CuooraHomeComponent >> renderHeaderOn: aCanvas [
 ]
 
 { #category : #rendering }
+CuooraHomeComponent >> renderReactionOptionsOf: aQuestion on: aCanvas [
+	aCanvas anchor
+		callback: [ aQuestion registrarLikeDe: self session user ];
+		with: 'Like'.
+	aCanvas space.
+	aCanvas render: ' | '.
+	aCanvas space.
+	aCanvas anchor
+		callback: [ aQuestion registrarDislikeDe: self session user ];
+		with: 'Dislike'
+]
+
+{ #category : #rendering }
 CuooraHomeComponent >> renderRelevantQuestion: aQuestion on: aCanvas [
-	aCanvas heading
-		level: 3;
-		with: aQuestion titulo.
+	self renderTitleOf: aQuestion on: aCanvas.
 	aCanvas
-		paragraph: [ aCanvas render: 'Realizada por: '. 
-			aCanvas strong: aQuestion autor nombre. aCanvas render: ' | '.
-			aCanvas render: (aQuestion respuestas size) asString,' respuestas'.
-			aCanvas break.
-			aCanvas render: (aQuestion cantLikes) asString,' likes | ',(aQuestion cantDislikes) asString, ' dislikes'.
-			aCanvas break.
-			aCanvas anchor 
-						callback: [aQuestion registrarLikeDe: self session user];
-						with: 'like '.
-			aCanvas space.
-			aCanvas anchor 
-						callback: [ aQuestion registrarDislikeDe: self session user ];
-						with: 'dislike'].
+		paragraph: [ self renderDataOf: aQuestion on: aCanvas.
+			self renderReactionOptionsOf: aQuestion on: aCanvas ].
 	aCanvas horizontalRule
 ]
 
@@ -81,9 +104,25 @@ CuooraHomeComponent >> renderRelevantQuestionsOn: aCanvas [
 	ultimasPreguntas do: [ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ].
 ]
 
+{ #category : #rendering }
+CuooraHomeComponent >> renderTitleOf: aQuestion on: aCanvas [
+	aCanvas heading
+		level: 3;
+		with: [aCanvas anchor 	
+					callback: ['Esto mostrara de alguna forma las respuestas'];
+					with: [ aCanvas emphasis: aQuestion titulo ]]
+]
+
 { #category : #hooks }
 CuooraHomeComponent >> style [
 	^'.right {
     float: right;
+	}
+	a {
+	 text-decoration: none;
+	 color: rgb(0,15,70);
+	}
+	body {
+		font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
 	}'
 ]

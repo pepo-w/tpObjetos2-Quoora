@@ -53,3 +53,8 @@ Pregunta >> respuestas [
 Pregunta >> titulo [
 	^ titulo.
 ]
+
+{ #category : #accessing }
+Pregunta >> topicosAsociados [ 
+	^topicosAsociados copy.
+]
