@@ -91,16 +91,6 @@ Cuoora >> topicos [
 	^topicos copy.
 ]
 
-{ #category : #accessing }
-Cuoora >> ultimasPreguntasRelevantesParaElUsuario: unUsuario [
-	"retorna las primeras 5 preguntas relevantes, ordenadas por fecha y hora, sin ocurrencias"
-	|relevantes|
-	relevantes := self preguntasRelevantesParaElUsuario: unUsuario.
-	(relevantes size > 5)
-	ifTrue: [ ^ relevantes first: 5 ].
-	^ relevantes.
-]
-
 { #category : #'private - testing' }
 Cuoora >> usuarios [
 	^usuarios copy.

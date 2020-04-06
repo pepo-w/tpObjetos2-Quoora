@@ -71,11 +71,14 @@ CuooraHomeComponent >> renderRelevantQuestion: aQuestion on: aCanvas [
 
 { #category : #rendering }
 CuooraHomeComponent >> renderRelevantQuestionsOn: aCanvas [
+	| ultimasPreguntas |
+	
 	aCanvas heading
 		level: 2;
 		with: 'Ultimas Preguntas'.
-	(sistema ultimasPreguntasRelevantesParaElUsuario: self session user)
-		do: [ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ]
+	
+	ultimasPreguntas := (sistema preguntasRelevantesParaElUsuario: self session user) takeFirst: 5.
+	ultimasPreguntas do: [ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ].
 ]
 
 { #category : #hooks }
