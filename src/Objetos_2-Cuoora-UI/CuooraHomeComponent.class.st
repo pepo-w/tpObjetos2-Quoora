@@ -31,16 +31,18 @@ CuooraHomeComponent >> renderContentOn: aCanvas [
 	self renderRelevantQuestionsOn: aCanvas.
 	aCanvas anchor
 				callback: [ self crearPregunta ];
-				with: 'Hacer una pregunta'.
+				with: [ aCanvas button: 'Hacer una pregunta'].
 ]
 
 { #category : #rendering }
 CuooraHomeComponent >> renderHeaderOn: aCanvas [
-	aCanvas div 
+	aCanvas div
 		class: 'right';
-		with: [aCanvas paragraph: [ aCanvas strong: self session user nombre, ' '.  
-								aCanvas anchor callback: [self cerrarSesion];
-								               with: 'logout']].	
+		with: [ aCanvas
+				paragraph: [ aCanvas strong: self session user nombre , ' '.
+					aCanvas anchor
+						callback: [ self cerrarSesion ];
+						with: [ aCanvas button: 'logout' ] ] ].
 	aCanvas heading: 'CuOOra'.
 	aCanvas horizontalRule
 ]

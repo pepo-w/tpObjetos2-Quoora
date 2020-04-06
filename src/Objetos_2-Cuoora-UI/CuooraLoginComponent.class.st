@@ -53,16 +53,22 @@ CuooraLoginComponent >> password: anObject [
 
 { #category : #rendering }
 CuooraLoginComponent >> renderContentOn: aCanvas [
-	aCanvas heading level: 1; with: 'Cuoora'.
-		aCanvas
-		form: [ aCanvas
-				paragraph: [ aCanvas label: 'Usuario: '.
-					aCanvas textInput required on: #nombre of: self ].
-			aCanvas
-				paragraph: [ aCanvas label: 'Contraseña: '.
-					aCanvas passwordInput required on: #password of: self ].
+	aCanvas heading
+		level: 1;
+		with: 'Cuoora'.
+	aCanvas
+		form: [ self renderInputElementsOn: aCanvas.
 			aCanvas button
 				callback: [ self nuevaSesion ];
 				with: 'Iniciar sesion' ]
-			
+]
+
+{ #category : #rendering }
+CuooraLoginComponent >> renderInputElementsOn: aCanvas [
+	aCanvas
+		paragraph: [ aCanvas label: 'Usuario: '.
+			aCanvas textInput required on: #nombre of: self ].
+	aCanvas
+		paragraph: [ aCanvas label: 'Contraseña: '.
+			aCanvas passwordInput required on: #password of: self ]
 ]

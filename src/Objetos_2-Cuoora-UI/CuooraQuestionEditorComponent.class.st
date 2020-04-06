@@ -68,21 +68,31 @@ CuooraQuestionEditorComponent >> renderContentOn: aCanvas [
 		level: 1;
 		with: 'Cuoora'.
 	aCanvas
-		form: [ aCanvas
-				paragraph: [ aCanvas label: 'Titulo: '.
-					aCanvas textInput on: #titulo of: self ].
-			aCanvas
-				paragraph: [ aCanvas label: 'Descripción: '.
-					aCanvas textInput on: #descripcion of: self ].
-				
-			self renderTopicsOn: aCanvas.
-			
-			aCanvas submitButton
-				callback: [ self nuevaPregunta ];
-				value: 'Crear pregunta'.
-			aCanvas submitButton
-				callback: [ self cancelar ];
-				value: 'Cancelar' ]
+		form: [ self renderInputElementsOn: aCanvas.
+				  self renderTopicsOn: aCanvas.
+				  self renderSubmitButtonsOn: aCanvas ].
+]
+
+{ #category : #rendering }
+CuooraQuestionEditorComponent >> renderInputElementsOn: aCanvas [
+	aCanvas label: 'Título: '.
+	aCanvas
+		paragraph: [ (aCanvas textInput on: #titulo of: self) size: 80 ].
+	aCanvas label: 'Descripción: '.
+	aCanvas
+		paragraph: [ (aCanvas textArea on: #descripcion of: self)
+				columns: 80;
+				rows: 5 ]
+]
+
+{ #category : #rendering }
+CuooraQuestionEditorComponent >> renderSubmitButtonsOn: aCanvas [
+	aCanvas submitButton
+		callback: [ self nuevaPregunta ];
+		value: 'Crear pregunta'.
+	aCanvas submitButton
+		callback: [ self cancelar ];
+		value: 'Cancelar'
 ]
 
 { #category : #rendering }
