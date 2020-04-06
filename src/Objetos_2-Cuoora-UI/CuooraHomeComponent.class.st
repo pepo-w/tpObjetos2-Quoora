@@ -86,9 +86,8 @@ CuooraHomeComponent >> renderReactionOptionsOf: aQuestion on: aCanvas [
 { #category : #rendering }
 CuooraHomeComponent >> renderRelevantQuestion: aQuestion on: aCanvas [
 	self renderTitleOf: aQuestion on: aCanvas.
-	aCanvas
-		paragraph: [ self renderDataOf: aQuestion on: aCanvas.
-			self renderReactionOptionsOf: aQuestion on: aCanvas ].
+	self renderDataOf: aQuestion on: aCanvas.
+	self renderReactionOptionsOf: aQuestion on: aCanvas.
 	aCanvas horizontalRule
 ]
 
@@ -109,7 +108,7 @@ CuooraHomeComponent >> renderTitleOf: aQuestion on: aCanvas [
 	aCanvas heading
 		level: 3;
 		with: [aCanvas anchor 	
-					callback: ['Esto mostrara de alguna forma las respuestas'];
+					callback: ['Mediante este callback se mostraran de alguna forma las respuestas existentes a la pregunta'];
 					with: [ aCanvas emphasis: aQuestion titulo ]]
 ]
 
