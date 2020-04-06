@@ -28,10 +28,7 @@ CuooraHomeComponent >> initialize [
 { #category : #rendering }
 CuooraHomeComponent >> renderContentOn: aCanvas [
 	self renderHeaderOn: aCanvas.
-	aCanvas heading
-		level: 2;
-		with: 'Ultimas Preguntas'.
-	(sistema ultimasPreguntasRelevantesParaElUsuario: self session user) do: [ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ].
+	self renderRelevantQuestionsOn: aCanvas.
 	aCanvas anchor
 				callback: [ self crearPregunta ];
 				with: 'Hacer una pregunta'.
@@ -68,6 +65,15 @@ CuooraHomeComponent >> renderRelevantQuestion: aQuestion on: aCanvas [
 						callback: [ aQuestion registrarDislikeDe: self session user ];
 						with: 'dislike'].
 	aCanvas horizontalRule
+]
+
+{ #category : #rendering }
+CuooraHomeComponent >> renderRelevantQuestionsOn: aCanvas [
+	aCanvas heading
+		level: 2;
+		with: 'Ultimas Preguntas'.
+	(sistema ultimasPreguntasRelevantesParaElUsuario: self session user)
+		do: [ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ]
 ]
 
 { #category : #hooks }

@@ -35,11 +35,6 @@ CuooraQuestionEditorComponent >> descripcion: anObject [
 	descripcion := anObject
 ]
 
-{ #category : #callbacks }
-CuooraQuestionEditorComponent >> eliminarTopicoAsociado: aTopic [
-	topicosAsociados remove: aTopic ifAbsent: nil.
-]
-
 { #category : #initialization }
 CuooraQuestionEditorComponent >> initialize [ 
 	super initialize.
@@ -49,7 +44,8 @@ CuooraQuestionEditorComponent >> initialize [
 { #category : #callbacks }
 CuooraQuestionEditorComponent >> nuevaPregunta [
 	(self datosInvalidos)
-		ifTrue: [ self inform: 'Debe completar todos los campos y seleccionar al menos 1 topico' ] 
+		ifTrue: [ self inform: 'Debe completar todos los campos y seleccionar al menos 1 topico'. 
+					 topicosAsociados removeAll.] 
 		ifFalse: [ self session user crearPreguntaConTitulo: titulo descripcion: descripcion topicosAsociados: topicosAsociados.
 					  self answer. ]. 
 
@@ -60,9 +56,7 @@ CuooraQuestionEditorComponent >> renderCheckBoxOf: aTopic on: aCanvas [
 	aCanvas text: aTopic nombre.
 	aCanvas checkbox
 		value: false;
-		callback: [ :value | value  
-									 ifTrue: [ self agregarTopicoAsociado: aTopic ] 
-									 ifFalse: [self eliminarTopicoAsociado: aTopic]]. 
+		callback: [ :value | 	value ifTrue: [ self agregarTopicoAsociado: aTopic ]]. 
 	aCanvas space.
 		
 ]
@@ -80,9 +74,9 @@ CuooraQuestionEditorComponent >> renderContentOn: aCanvas [
 			aCanvas
 				paragraph: [ aCanvas label: 'Descripción: '.
 					aCanvas textInput on: #descripcion of: self ].
-
-			"aca estaria el dropdown para los topicos"
+				
 			self renderTopicsOn: aCanvas.
+			
 			aCanvas submitButton
 				callback: [ self nuevaPregunta ];
 				value: 'Crear pregunta'.

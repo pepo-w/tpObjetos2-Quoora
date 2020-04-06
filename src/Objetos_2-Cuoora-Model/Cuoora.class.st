@@ -24,6 +24,7 @@ Cuoora class >> prebuiltInstance [
 	deportes:= cuoora agregarTopicoConNombre: 'deportes' descripcion: 'tercer topico'.
 	tecnologia:= cuoora agregarTopicoConNombre: 'tecnologia' descripcion: 'segundo topico'.
 	cuoora agregarTopicoConNombre: 'videojuegos' descripcion: 'cuarto topico'.
+	cuoora agregarTopicoConNombre: 'Otro' descripcion: 'No pertenezco a ninguna categoria'.
 	daniel := cuoora registrarUsuarioConNombre: 'daniel' password: '12345'.
 	maria := cuoora registrarUsuarioConNombre: 'maria' password: '12345'.
 	jose := cuoora registrarUsuarioConNombre: 'jose' password: '12345'.

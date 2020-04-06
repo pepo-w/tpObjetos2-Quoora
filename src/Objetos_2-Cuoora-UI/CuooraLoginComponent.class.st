@@ -34,7 +34,7 @@ CuooraLoginComponent >> nuevaSesion [
 	user := sistema buscarUsuarioConNombre: self nombre yPassword: self password.
 	self session login: user.
 	self session isLoggedIn 
-		ifFalse: [ self inform: 'Datos invalidos'  ]
+		ifFalse: [ self inform: 'Su nombre de usuario y/o contraseña son inválidos'  ]
 		ifTrue: [  home := CuooraHomeComponent new.
 						  self call: home ].
 
