@@ -15,11 +15,6 @@ CuooraQuestionEditorComponent >> agregarTopicoAsociado: aTopic [
 	topicosAsociados add: aTopic.
 ]
 
-{ #category : #callbacks }
-CuooraQuestionEditorComponent >> cancelar [
-	self answer.
-]
-
 { #category : #boolean }
 CuooraQuestionEditorComponent >> datosInvalidos [
 	^ (self descripcion isEmpty or: [ self titulo isEmpty or: [topicosAsociados isEmpty]]).
@@ -91,7 +86,7 @@ CuooraQuestionEditorComponent >> renderSubmitButtonsOn: aCanvas [
 		callback: [ self nuevaPregunta ];
 		value: 'Crear pregunta'.
 	aCanvas submitButton
-		callback: [ self cancelar ];
+		callback: [ self answer ];
 		value: 'Cancelar'
 ]
 
@@ -100,7 +95,7 @@ CuooraQuestionEditorComponent >> renderTopicsOn: aCanvas [
 	aCanvas strong: 'Topicos: '.
 	topicos do: [ :each | self renderCheckBoxOf: each on: aCanvas ].
 	aCanvas break.
-	aCanvas horizontalRule.
+	aCanvas horizontalRule. 
 ]
 
 { #category : #accessing }

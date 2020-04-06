@@ -29,16 +29,13 @@ CuooraLoginComponent >> nombre: anObject [
 
 { #category : #callbacks }
 CuooraLoginComponent >> nuevaSesion [
-	| user sistema home|
+	| user sistema |
 	sistema := Cuoora unicaInstancia.
 	user := sistema buscarUsuarioConNombre: self nombre yPassword: self password.
 	self session login: user.
-	self session isLoggedIn 
-		ifFalse: [ self inform: 'Su nombre de usuario y/o contraseña son inválidos'  ]
-		ifTrue: [  home := CuooraHomeComponent new.
-						  self call: home ].
-
-	
+	self session isLoggedIn
+		ifFalse: [ self inform: 'Su nombre de usuario y/o contraseña son inválidos' ]
+		ifTrue: [ self call: CuooraHomeComponent new ]
 ]
 
 { #category : #accessing }
