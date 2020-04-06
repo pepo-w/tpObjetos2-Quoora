@@ -57,10 +57,10 @@ CuooraLoginComponent >> renderContentOn: aCanvas [
 		aCanvas
 		form: [ aCanvas
 				paragraph: [ aCanvas label: 'Usuario: '.
-					aCanvas textInput on: #nombre of: self ].
+					aCanvas textInput required on: #nombre of: self ].
 			aCanvas
 				paragraph: [ aCanvas label: 'Contraseña: '.
-					aCanvas passwordInput on: #password of: self ].
+					aCanvas passwordInput required on: #password of: self ].
 			aCanvas button
 				callback: [ self nuevaSesion ];
 				with: 'Iniciar sesion' ]
