@@ -17,6 +17,13 @@ Class {
 	#category : #'Objetos_2-Cuoora-UI'
 }
 
+{ #category : #'class initialization' }
+CuooraLoginComponent class >> initialize [
+	 | application |
+    application := WAAdmin register: self asApplicationAt: 'cuoora'.
+    application preferenceAt: #sessionClass put: CuooraSession.
+]
+
 { #category : #accessing }
 CuooraLoginComponent >> nombre [
 	^ nombre
