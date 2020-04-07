@@ -12,7 +12,8 @@ Class {
 	#superclass : #WAComponent,
 	#instVars : [
 		'nombre',
-		'password'
+		'password',
+		'errorMsg'
 	],
 	#category : #'Objetos_2-Cuoora-UI'
 }
@@ -41,7 +42,7 @@ CuooraLoginComponent >> nuevaSesion [
 	user := sistema buscarUsuarioConNombre: self nombre yPassword: self password.
 	self session login: user.
 	self session isLoggedIn
-		ifFalse: [ self inform: 'Su nombre de usuario y/o contraseña son inválidos' ]
+		ifFalse: [ errorMsg := 'El nombre de usuario y/o contraseña son inválidos' ]
 		ifTrue: [ self call: CuooraHomeComponent new ]
 ]
 
@@ -64,7 +65,8 @@ CuooraLoginComponent >> renderContentOn: aCanvas [
 		form: [ self renderInputElementsOn: aCanvas.
 			aCanvas button
 				callback: [ self nuevaSesion ];
-				with: 'Iniciar sesion' ]
+				with: 'Iniciar sesion' ].
+	errorMsg ifNotNil: [ aCanvas paragraph: errorMsg. errorMsg := nil ].
 ]
 
 { #category : #rendering }
