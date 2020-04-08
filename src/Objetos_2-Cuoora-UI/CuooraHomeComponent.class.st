@@ -2,7 +2,7 @@ Class {
 	#name : #CuooraHomeComponent,
 	#superclass : #WAComponent,
 	#instVars : [
-		'sistema'
+		'questionViews'
 	],
 	#category : #'Objetos_2-Cuoora-UI'
 }
@@ -13,16 +13,38 @@ CuooraHomeComponent >> cerrarSesion [
 	self answer.
 ]
 
+{ #category : #hooks }
+CuooraHomeComponent >> children [ 	
+	^(self obtenerUltimasPreguntas) collect: [ :each | self questionViewForQuestion: each ].
+]
+
 { #category : #callbacks }
 CuooraHomeComponent >> crearPregunta [
-	self call: (CuooraQuestionEditorComponent new topicos: (sistema topicos); yourself).
+	self call: (CuooraQuestionEditorComponent new topicos: (self model topicos); yourself).
 	
 ]
 
 { #category : #initialization }
 CuooraHomeComponent >> initialize [ 
 	super initialize.
-	sistema := Cuoora unicaInstancia.
+	self obtenerUltimasPreguntas.
+	questionViews := Dictionary new.
+]
+
+{ #category : #accessing }
+CuooraHomeComponent >> model [ 
+	^Cuoora unicaInstancia.
+]
+
+{ #category : #'as yet unclassified' }
+CuooraHomeComponent >> obtenerUltimasPreguntas [
+	"Retorna una coleccion con las ultimas 5 preguntas"
+		^(((self model) preguntasRelevantesParaElUsuario: self session user) takeFirst: 5).
+]
+
+{ #category : #'as yet unclassified' }
+CuooraHomeComponent >> questionViewForQuestion: aQuestion [
+	^ questionViews at: aQuestion ifAbsentPut: [ CuooraQuestionComponent question: aQuestion ].
 ]
 
 { #category : #rendering }
@@ -40,24 +62,6 @@ CuooraHomeComponent >> renderContentOn: aCanvas [
 ]
 
 { #category : #rendering }
-CuooraHomeComponent >> renderDataOf: aQuestion on: aCanvas [
-	aCanvas render: 'Topicos asociados: '.
-	(aQuestion topicosAsociados) 
-		do: [ :each | aCanvas render: each nombre,'. ' ].
-	aCanvas break.
-	aCanvas render: 'Realizada por: '.
-	aCanvas strong: aQuestion autor nombre.
-	aCanvas render: ' | '.
-	aCanvas render: aQuestion respuestas size asString , ' respuestas'.
-	aCanvas break.
-	aCanvas
-		render:
-			aQuestion cantLikes asString , ' likes | '
-				, aQuestion cantDislikes asString , ' dislikes'.
-	aCanvas break
-]
-
-{ #category : #rendering }
 CuooraHomeComponent >> renderHeaderOn: aCanvas [
 	aCanvas div
 		class: 'right';
@@ -71,45 +75,16 @@ CuooraHomeComponent >> renderHeaderOn: aCanvas [
 ]
 
 { #category : #rendering }
-CuooraHomeComponent >> renderReactionOptionsOf: aQuestion on: aCanvas [
-	aCanvas anchor
-		callback: [ aQuestion registrarLikeDe: self session user ];
-		with: 'Like'.
-	aCanvas space.
-	aCanvas render: ' | '.
-	aCanvas space.
-	aCanvas anchor
-		callback: [ aQuestion registrarDislikeDe: self session user ];
-		with: 'Dislike'
-]
-
-{ #category : #rendering }
 CuooraHomeComponent >> renderRelevantQuestion: aQuestion on: aCanvas [
-	self renderTitleOf: aQuestion on: aCanvas.
-	self renderDataOf: aQuestion on: aCanvas.
-	self renderReactionOptionsOf: aQuestion on: aCanvas.
-	aCanvas horizontalRule
+	aCanvas render: (self questionViewForQuestion: aQuestion).
 ]
 
 { #category : #rendering }
 CuooraHomeComponent >> renderRelevantQuestionsOn: aCanvas [
-	| ultimasPreguntas |
-	
 	aCanvas heading
 		level: 2;
-		with: 'Ultimas Preguntas'.
-	
-	ultimasPreguntas := (sistema preguntasRelevantesParaElUsuario: self session user) takeFirst: 5.
-	ultimasPreguntas do: [ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ].
-]
-
-{ #category : #rendering }
-CuooraHomeComponent >> renderTitleOf: aQuestion on: aCanvas [
-	aCanvas heading
-		level: 3;
-		with: [aCanvas anchor 	
-					callback: ['Mediante este callback se mostraran de alguna forma las respuestas existentes a la pregunta'];
-					with: [ aCanvas emphasis: aQuestion titulo ]]
+		with: 'Ultimas Preguntas'.	
+	(self obtenerUltimasPreguntas) do: [ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ].
 ]
 
 { #category : #hooks }
