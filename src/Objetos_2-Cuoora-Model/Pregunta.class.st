@@ -39,6 +39,11 @@ Pregunta >> initConTitulo: unTitulo descripcion: unaDescripcion topicosAsociados
 	self initConAutor: unUsuario.
 ]
 
+{ #category : #accessing }
+Pregunta >> nombreTopicosAsociados [ 
+	^ self topicosAsociados collect: [ :each | each nombre ].
+]
+
 { #category : #abstract }
 Pregunta >> puntaje [
 	^ 20 + self diferenciaLikes.
