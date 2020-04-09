@@ -60,15 +60,18 @@ CuooraQuestionEditorComponent >> renderContentOn: aCanvas [
 CuooraQuestionEditorComponent >> renderInputElementsOn: aCanvas [
 	aCanvas label: 'Título: '.
 	aCanvas
-		paragraph: [ (aCanvas textInput on: #titulo of: self) size: 80 ].
+		paragraph: [ (aCanvas textInput on: #titulo of: self) size: 80;
+			attributeAt: 'placeholder' put: 'ingrese aqui el titulo de su pregunta' ].
 	aCanvas label: 'Descripción: '.
 	aCanvas
 		paragraph: [ (aCanvas textArea on: #descripcion of: self)
 				columns: 80;
-				rows: 5 ].
+				rows: 5;
+				attributeAt: 'placeholder' put: 'ingrese aqui el desarrollo de su pregunta' ].
 	aCanvas label: 'Topicos: '.
 	aCanvas
-		paragraph: [ (aCanvas textInput on: #topicosAsociados of: self) size: 80 ].
+		paragraph: [ (aCanvas textInput on: #topicosAsociados of: self) size: 80; 
+			attributeAt: 'placeholder' put: 'ingrese topicos separados por coma' ].
 ]
 
 { #category : #rendering }
