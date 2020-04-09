@@ -18,7 +18,7 @@ Cuoora class >> clearUnicaInstancia [
 
 { #category : #'as yet unclassified' }
 Cuoora class >> prebuiltInstance [
-	| cuoora daniel maria jose informatica deportes tecnologia|
+	| cuoora daniel maria jose informatica deportes tecnologia question|
 	cuoora := self new.
 	informatica := cuoora agregarTopicoConNombre: 'informatica' descripcion: 'primer topico'.
 	deportes:= cuoora agregarTopicoConNombre: 'deportes' descripcion: 'tercer topico'.
@@ -34,7 +34,8 @@ Cuoora class >> prebuiltInstance [
 	maria agregarTopicoDeInteres: deportes.
 	daniel agregarTopicoDeInteres: informatica.
 	jose agregarTopicoDeInteres: tecnologia.
-	jose crearPreguntaConTitulo: 'pregunta de jose. relevante para daniel y maria' descripcion: 'soy jose' topicosAsociados: (OrderedCollection with: deportes).
+	question:= jose crearPreguntaConTitulo: 'pregunta de jose. relevante para daniel y maria' descripcion: 'soy jose' topicosAsociados: (OrderedCollection with: deportes).
+	maria crearRespuestaConTexto: 'Respuesta de maria' paraPregunta: question.
 	daniel crearPreguntaConTitulo: 'pregunta de daniel. relevante para maria' descripcion: 'soy daniel' topicosAsociados: (OrderedCollection with: tecnologia). 
 	maria crearPreguntaConTitulo: 'pregunta de maria. relevante para daniel por topico informatica' descripcion: 'soy maria' topicosAsociados: (OrderedCollection with: informatica). 
 	^cuoora.
