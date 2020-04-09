@@ -18,27 +18,26 @@ Cuoora class >> clearUnicaInstancia [
 
 { #category : #'as yet unclassified' }
 Cuoora class >> prebuiltInstance [
-	| cuoora daniel maria jose informatica deportes tecnologia question|
+	| cuoora pedro diego juan oo1 testDeUnidad smalltalk question1 question2 |
 	cuoora := self new.
-	informatica := cuoora agregarTopicoConNombre: 'informatica' descripcion: 'primer topico'.
-	deportes:= cuoora agregarTopicoConNombre: 'deportes' descripcion: 'tercer topico'.
-	tecnologia:= cuoora agregarTopicoConNombre: 'tecnologia' descripcion: 'segundo topico'.
-	cuoora agregarTopicoConNombre: 'videojuegos' descripcion: 'cuarto topico'.
-	cuoora agregarTopicoConNombre: 'Otro' descripcion: 'No pertenezco a ninguna categoria'.
-	daniel := cuoora registrarUsuarioConNombre: 'daniel' password: '12345'.
-	maria := cuoora registrarUsuarioConNombre: 'maria' password: '12345'.
-	jose := cuoora registrarUsuarioConNombre: 'jose' password: '12345'.
+	"usuarios"
+	pedro := cuoora registrarUsuarioConNombre: 'pedro@cuoora.com' password: 'pedro@cuoora.com'.
+	diego := cuoora registrarUsuarioConNombre: 'diego@cuoora.com' password: 'diego@cuoora.com'.
+	juan := cuoora registrarUsuarioConNombre: 'juan@cuoora.com' password: 'juan@cuoora.com'.
+	juan seguirA: diego.
+	pedro seguirA: juan.
+
+	"topicos"
+	oo1 := cuoora agregarTopicoConNombre: 'oo1' descripcion: 'orientacion a objetos 1'.
+	testDeUnidad := cuoora agregarTopicoConNombre: 'Test de unidad' descripcion: 'testing con SUnit'.
+	smalltalk := cuoora agregarTopicoConNombre: 'Smalltalk' descripcion: 'lenguaje de programacion'.
 	
-	daniel seguirA: jose.
-	maria seguirA: daniel.
-	maria agregarTopicoDeInteres: deportes.
-	daniel agregarTopicoDeInteres: informatica.
-	jose agregarTopicoDeInteres: tecnologia.
-	question:= jose crearPreguntaConTitulo: 'pregunta de jose. relevante para daniel y maria' descripcion: 'soy jose' topicosAsociados: (OrderedCollection with: deportes).
-	maria crearRespuestaConTexto: 'Esta es la respuesta de maria' paraPregunta: question.
-	daniel crearRespuestaConTexto: 'Esta es la respuesta de daniel' paraPregunta: question. 
-	daniel crearPreguntaConTitulo: 'pregunta de daniel. relevante para maria' descripcion: 'soy daniel' topicosAsociados: (OrderedCollection with: tecnologia). 
-	maria crearPreguntaConTitulo: 'pregunta de maria. relevante para daniel por topico informatica' descripcion: 'soy maria' topicosAsociados: (OrderedCollection with: informatica). 
+	"preguntas y respuestas"
+	question1 := pedro crearPreguntaConTitulo: '¿Para qué sirve el método SetUp?' descripcion: '' topicosAsociados: (OrderedCollection with: oo1 with: testDeUnidad).
+	diego crearRespuestaConTexto: 'Sirve para instanciar los objetos que son evaluados por el test en un único método y que se ejecute siempre antes de cada test.' paraPregunta: question1.
+	question2 := diego crearPreguntaConTitulo: '¿Qué significa #messageNotUnderstood?' descripcion: '' topicosAsociados: (OrderedCollection with: oo1 with: smalltalk).
+	pedro crearRespuestaConTexto: 'Significa que el objeto que recibió el mensaje no encontró ningún método para ejecutar en respuesta.' paraPregunta: question2.
+	
 	^cuoora.
 ]
 

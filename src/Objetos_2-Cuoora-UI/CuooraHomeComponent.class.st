@@ -50,6 +50,7 @@ CuooraHomeComponent >> questionViewForQuestion: aQuestion [
 { #category : #rendering }
 CuooraHomeComponent >> renderButtonOn: aCanvas [
 	aCanvas anchor
+		class: 'right';
 		callback: [ self crearPregunta ];
 		with: [ aCanvas button: 'Hacer una nueva pregunta' ]
 ]
@@ -57,8 +58,9 @@ CuooraHomeComponent >> renderButtonOn: aCanvas [
 { #category : #rendering }
 CuooraHomeComponent >> renderContentOn: aCanvas [
 	self renderHeaderOn: aCanvas.
-	self renderRelevantQuestionsOn: aCanvas.
 	self renderButtonOn: aCanvas.
+	self renderRelevantQuestionsOn: aCanvas.
+	
 
 ]
 
