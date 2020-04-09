@@ -41,7 +41,7 @@ CuooraResponsesComponent >> question: aQuestion [
 CuooraResponsesComponent >> renderContentOn: aCanvas [
 	self responses do: [ :each | self renderResponse: each on: aCanvas  ].
 	aCanvas anchor 
-		callback: [ "esto llamará al componente para crear respuesta "];
+		callback: [ self showCreateResponsesComponent ];
 		with: 'crear respuesta'.
 	
 ]
@@ -75,4 +75,11 @@ CuooraResponsesComponent >> renderResponse: aResponse on: aCanvas [
 { #category : #accessing }
 CuooraResponsesComponent >> responses [
 	^ question respuestas.
+]
+
+{ #category : #'as yet unclassified' }
+CuooraResponsesComponent >> showCreateResponsesComponent [ 
+	| view |
+	view := CuooraCreateResponseComponent question: self question.
+	self call: view.
 ]
