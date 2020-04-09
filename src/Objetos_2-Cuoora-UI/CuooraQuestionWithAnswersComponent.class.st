@@ -33,7 +33,7 @@ CuooraQuestionWithAnswersComponent class >> question: aQuestion [
 	instance := self new.
 	instance question: aQuestion.
 	instance questionView: (CuooraQuestionComponent question: aQuestion).
-	instance responsesView: (CuooraResponsesComponent responses: aQuestion respuestas).
+	instance responsesView: (CuooraResponsesComponent question: aQuestion).
 	^ instance
 ]
 
@@ -66,9 +66,6 @@ CuooraQuestionWithAnswersComponent >> questionView: anObject [
 CuooraQuestionWithAnswersComponent >> renderContentOn: aCanvas [
 	aCanvas render: questionView.
 	aCanvas render: responsesView.
-	aCanvas button 
-		callback: [ "Posiblemente haya un boton como este para crear una nueva respuesta, puede ser un anchor con un boton o directamente un anchor"];
-		with: 'Agregar respuesta'.
 ]
 
 { #category : #accessing }

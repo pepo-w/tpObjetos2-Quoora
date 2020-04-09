@@ -34,3 +34,8 @@ Respuesta >> initConTexto: unTexto autor: unUsuario pregunta: unaPregunta [
 Respuesta >> puntaje [
 	^ 50 + self diferenciaLikes.
 ]
+
+{ #category : #accessing }
+Respuesta >> texto [ 
+	^texto.
+]

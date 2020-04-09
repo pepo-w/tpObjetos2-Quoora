@@ -58,7 +58,8 @@ CuooraHomeComponent >> renderButtonOn: aCanvas [
 CuooraHomeComponent >> renderContentOn: aCanvas [
 	self renderHeaderOn: aCanvas.
 	self renderRelevantQuestionsOn: aCanvas.
-	self renderButtonOn: aCanvas
+	self renderButtonOn: aCanvas.
+
 ]
 
 { #category : #rendering }

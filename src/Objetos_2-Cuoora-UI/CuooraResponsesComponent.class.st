@@ -1,31 +1,49 @@
 "
 Componente que muestra las respuestas a una determinada pregunta.
     Instance Variables
-	question:		<una coleccion de respuestas>
+	question:		<a Pregunta>
 			
-recibe un mensaje de Clase para instanciar con las respuestas:
-	CuooraResponsesComponent responses: aCollectionOfRespuestas
+necesito tener como variable de instancia a la pregunta implicada ya que si se agrega una nueva respuesta se mantiene la consistencia en la interfaz
+			
+recibe un mensaje de Clase para instanciar correctamente:
+	CuooraResponsesComponent question: aQuestion
+	
+
 "
 Class {
 	#name : #CuooraResponsesComponent,
 	#superclass : #WAComponent,
 	#instVars : [
-		'responses'
+		'question'
 	],
 	#category : #'Objetos_2-Cuoora-UI'
 }
 
 { #category : #accessing }
-CuooraResponsesComponent class >> responses: aCollection [ 
+CuooraResponsesComponent class >> question: aQuestion [  
 	| instance |
 	instance := self new.
-	instance responses: aCollection.
+	instance question: aQuestion.
 	^instance.
+]
+
+{ #category : #accessing }
+CuooraResponsesComponent >> question [ 
+	^question 
+]
+
+{ #category : #accessing }
+CuooraResponsesComponent >> question: aQuestion [
+	question := aQuestion.
 ]
 
 { #category : #rendering }
 CuooraResponsesComponent >> renderContentOn: aCanvas [
-	responses do: [ :each | self renderResponse: each on: aCanvas  ].
+	self responses do: [ :each | self renderResponse: each on: aCanvas  ].
+	aCanvas anchor 
+		callback: [ "esto llamará al componente para crear respuesta "];
+		with: 'crear respuesta'.
+	
 ]
 
 { #category : #rendering }
@@ -35,14 +53,25 @@ CuooraResponsesComponent >> renderResponse: aResponse on: aCanvas [
 		Texto de la respuesta ....
 		0 likes | 0 dislikes
 		Like | Dislike"
+	aCanvas heading 
+		level: 3;
+		with: [ aCanvas render: 'Respuesta de '.
+				  aCanvas emphasis: aResponse autor nombre ].
+	aCanvas paragraph: [
+		aCanvas render: aResponse texto.
+		aCanvas break.
+		aCanvas render: (aResponse cantLikes asString), ' likes | ', (aResponse cantDislikes asString), ' dislikes '.
+		aCanvas break.
+		aCanvas anchor 
+			callback: [aResponse registrarLikeDe: self session user];
+			with: 'Like '.
+		aCanvas render: ' | '.
+		aCanvas anchor 
+			callback: [ aResponse registrarDislikeDe: self session user ];
+			with: 'Dislike'. ]
 ]
 
 { #category : #accessing }
 CuooraResponsesComponent >> responses [
-	^ responses
-]
-
-{ #category : #accessing }
-CuooraResponsesComponent >> responses: aCollection [
-	responses := aCollection.
+	^ question respuestas.
 ]

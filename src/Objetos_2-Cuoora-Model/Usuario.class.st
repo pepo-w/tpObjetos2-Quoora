@@ -37,7 +37,7 @@ Usuario >> borrarRespuesta: unaRespuesta [
 
 { #category : #calculating }
 Usuario >> calcularPuntaje [
-	"Se tienen en cuenta todas las preguntas del usuario y todas las respuestas validas, osea las que responden a una pregunta que no hizo el mismo"
+	"Se tienen en cuenta todas las preguntas del usuario y todas las respuestas validas, osea las que responden a una pregunta que no hizo él mismo"
 	| puntajePreguntas respuestasValidas |
 	puntajePreguntas := preguntas sumNumbers: [ :each | each puntaje ].
 	respuestasValidas := respuestas select: [ :each | each esDistintoAutorQueLaPregunta ].

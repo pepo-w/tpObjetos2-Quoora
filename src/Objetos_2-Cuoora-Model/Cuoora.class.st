@@ -35,7 +35,8 @@ Cuoora class >> prebuiltInstance [
 	daniel agregarTopicoDeInteres: informatica.
 	jose agregarTopicoDeInteres: tecnologia.
 	question:= jose crearPreguntaConTitulo: 'pregunta de jose. relevante para daniel y maria' descripcion: 'soy jose' topicosAsociados: (OrderedCollection with: deportes).
-	maria crearRespuestaConTexto: 'Respuesta de maria' paraPregunta: question.
+	maria crearRespuestaConTexto: 'Esta es la respuesta de maria' paraPregunta: question.
+	daniel crearRespuestaConTexto: 'Esta es la respuesta de daniel' paraPregunta: question. 
 	daniel crearPreguntaConTitulo: 'pregunta de daniel. relevante para maria' descripcion: 'soy daniel' topicosAsociados: (OrderedCollection with: tecnologia). 
 	maria crearPreguntaConTitulo: 'pregunta de maria. relevante para daniel por topico informatica' descripcion: 'soy maria' topicosAsociados: (OrderedCollection with: informatica). 
 	^cuoora.

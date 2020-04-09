@@ -40,14 +40,15 @@ CuooraQuestionComponent >> renderBodyOn: aCanvas [
 		render:
 			question cantLikes asString , ' likes | '
 				, question cantDislikes asString , ' dislikes'.
-	aCanvas break
+	aCanvas break.
 ]
 
 { #category : #rendering }
 CuooraQuestionComponent >> renderContentOn: aCanvas [
 	self renderTitleOn: aCanvas.
-	self renderBodyOn: aCanvas.
-	self renderReactionOptionsOn:aCanvas.
+	aCanvas paragraph: [  
+		self renderBodyOn: aCanvas.
+		self renderReactionOptionsOn:aCanvas ].
 	aCanvas horizontalRule
 ]
 
@@ -79,5 +80,5 @@ CuooraQuestionComponent >> showQuestionWithAnswers [
 	"Cada vez que se hace click en el título de una pregunta, se llama al componente que se declara a continuacion. Esto genera que cada vez que se hace click en el título se genera un call nuevo. Hay que ver si esto produce inconvenientes"
 	| component |
 	component := CuooraQuestionWithAnswersComponent question: self question.
-	self session presenter call: component. 
+	self session presenter call: component.
 ]
