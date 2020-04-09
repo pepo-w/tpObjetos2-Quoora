@@ -104,6 +104,11 @@ Usuario >> seguirA: otroUsuario [
 	usuariosQueSigue addIfNotPresent: otroUsuario.
 ]
 
+{ #category : #boolean }
+Usuario >> sigueA: unUsuario [ 
+	^ (usuariosQueSigue includes: unUsuario ).
+]
+
 { #category : #accessing }
 Usuario >> topicosDeInteres [
 	^ topicosDeInteres copy.

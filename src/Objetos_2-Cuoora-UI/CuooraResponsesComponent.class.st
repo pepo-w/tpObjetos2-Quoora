@@ -68,7 +68,8 @@ CuooraResponsesComponent >> renderResponse: aResponse on: aCanvas [
 		aCanvas render: ' | '.
 		aCanvas anchor 
 			callback: [ aResponse registrarDislikeDe: self session user ];
-			with: 'Dislike'. ]
+			with: 'Dislike'. ].
+	aCanvas horizontalRule
 ]
 
 { #category : #accessing }

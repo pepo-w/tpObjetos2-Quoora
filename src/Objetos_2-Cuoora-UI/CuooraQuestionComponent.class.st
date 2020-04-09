@@ -31,7 +31,7 @@ CuooraQuestionComponent >> renderBodyOn: aCanvas [
 	aCanvas break.
 	aCanvas render: 'Realizada por: '.
 	aCanvas anchor
-		callback: [ "esto llevaria a un componente q muestra al autor" ];
+		callback: [ self showProfile ];
 		with: [ aCanvas strong: question autor nombre. ].
 	aCanvas render: ' | '.
 	aCanvas render: question respuestas size asString , ' respuestas'.
@@ -73,6 +73,13 @@ CuooraQuestionComponent >> renderTitleOn: aCanvas [
 				callback:
 						[ self showQuestionWithAnswers];
 				with: [ aCanvas emphasis: question titulo ] ]
+]
+
+{ #category : #'as yet unclassified' }
+CuooraQuestionComponent >> showProfile [ 
+	| view |
+	view := CuooraProfileComponent user: self question autor.
+	self session presenter call: view.
 ]
 
 { #category : #callbacks }
