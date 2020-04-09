@@ -52,8 +52,10 @@ Cuoora class >> unicaInstancia [
 
 { #category : #adding }
 Cuoora >> agregarTopicoConNombre: unNombre descripcion: unaDescripcion [
-"deberia verificar que no se repita el topico??"
-	^ (topicos add: (Topico conNombre: unNombre descripcion: unaDescripcion)).
+	| topico |
+	topico := topicos detect: [ :each | each nombre asLowercase = unNombre asLowercase ] ifNone: [ nil ].
+	topico ifNil: [ topico := (topicos add: (Topico conNombre: unNombre descripcion: unaDescripcion)) ].
+	^ topico.
 ]
 
 { #category : #search }

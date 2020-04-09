@@ -20,7 +20,7 @@ CuooraHomeComponent >> children [
 
 { #category : #callbacks }
 CuooraHomeComponent >> crearPregunta [
-	self call: (CuooraQuestionEditorComponent new topicos: (self model topicos); yourself).
+	self call: (CuooraQuestionEditorComponent new).
 	
 ]
 

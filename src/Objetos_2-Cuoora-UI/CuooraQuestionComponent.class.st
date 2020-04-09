@@ -27,12 +27,12 @@ CuooraQuestionComponent >> question: anObject [
 
 { #category : #rendering }
 CuooraQuestionComponent >> renderBodyOn: aCanvas [
-	aCanvas emphasis: 'Topicos: ', (question nombreTopicosAsociados) asCommaString.
-	"question topicosAsociados
-		do: [ :each | aCanvas render: each nombre , '. ' ]."
+	aCanvas emphasis: 'Topicos: ', (question topicosAsociados collect: [ :each | each nombre ]) asCommaString.
 	aCanvas break.
 	aCanvas render: 'Realizada por: '.
-	aCanvas strong: question autor nombre.
+	aCanvas anchor
+		callback: [ "esto llevaria a un componente q muestra al autor" ];
+		with: [ aCanvas strong: question autor nombre. ].
 	aCanvas render: ' | '.
 	aCanvas render: question respuestas size asString , ' respuestas'.
 	aCanvas break.

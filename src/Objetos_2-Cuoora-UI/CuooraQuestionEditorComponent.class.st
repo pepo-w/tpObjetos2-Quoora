@@ -4,20 +4,22 @@ Class {
 	#instVars : [
 		'titulo',
 		'descripcion',
-		'topicos',
 		'topicosAsociados'
 	],
 	#category : #'Objetos_2-Cuoora-UI'
 }
 
-{ #category : #callbacks }
-CuooraQuestionEditorComponent >> agregarTopicoAsociado: aTopic [
-	topicosAsociados add: aTopic.
+{ #category : #'as yet unclassified' }
+CuooraQuestionEditorComponent >> crearTopicos [
+	| nombresTopicos |
+	nombresTopicos := topicosAsociados findBetweenSubstrings: ','.
+	^ nombresTopicos collect: [ :each | (self model agregarTopicoConNombre: each descripcion: '' ) ].
+	
 ]
 
 { #category : #boolean }
 CuooraQuestionEditorComponent >> datosInvalidos [
-	^ (self descripcion isEmpty or: [ self titulo isEmpty or: [topicosAsociados isEmpty]]).
+	^ (self descripcion isEmpty or: [ self titulo isEmpty or: [ self topicosAsociados isEmpty ]]).
 ]
 
 { #category : #accessing }
@@ -30,30 +32,17 @@ CuooraQuestionEditorComponent >> descripcion: anObject [
 	descripcion := anObject
 ]
 
-{ #category : #initialization }
-CuooraQuestionEditorComponent >> initialize [ 
-	super initialize.
-	topicosAsociados := OrderedCollection new.
+{ #category : #accessing }
+CuooraQuestionEditorComponent >> model [ 
+	^Cuoora unicaInstancia.
 ]
 
 { #category : #callbacks }
 CuooraQuestionEditorComponent >> nuevaPregunta [
-	(self datosInvalidos)
-		ifTrue: [ self inform: 'Debe completar todos los campos y seleccionar al menos 1 topico'. 
-					 topicosAsociados removeAll.] 
-		ifFalse: [ self session user crearPreguntaConTitulo: titulo descripcion: descripcion topicosAsociados: topicosAsociados.
-					  self answer. ]. 
-
-]
-
-{ #category : #rendering }
-CuooraQuestionEditorComponent >> renderCheckBoxOf: aTopic on: aCanvas [
-	aCanvas text: aTopic nombre.
-	aCanvas checkbox
-		value: false;
-		callback: [ :value | 	value ifTrue: [ self agregarTopicoAsociado: aTopic ]]. 
-	aCanvas space.
-		
+	self datosInvalidos
+		ifTrue: [ self inform: 'Debe completar todos los campos e ingresar al menos 1 topico' ]
+		ifFalse: [ self session user crearPreguntaConTitulo: titulo descripcion: descripcion topicosAsociados: self crearTopicos.
+			self answer ]
 ]
 
 { #category : #rendering }
@@ -64,7 +53,6 @@ CuooraQuestionEditorComponent >> renderContentOn: aCanvas [
 		with: 'Cuoora'.
 	aCanvas
 		form: [ self renderInputElementsOn: aCanvas.
-				  self renderTopicsOn: aCanvas.
 				  self renderSubmitButtonsOn: aCanvas ].
 ]
 
@@ -77,7 +65,10 @@ CuooraQuestionEditorComponent >> renderInputElementsOn: aCanvas [
 	aCanvas
 		paragraph: [ (aCanvas textArea on: #descripcion of: self)
 				columns: 80;
-				rows: 5 ]
+				rows: 5 ].
+	aCanvas label: 'Topicos: '.
+	aCanvas
+		paragraph: [ (aCanvas textInput on: #topicosAsociados of: self) size: 80 ].
 ]
 
 { #category : #rendering }
@@ -88,14 +79,6 @@ CuooraQuestionEditorComponent >> renderSubmitButtonsOn: aCanvas [
 	aCanvas submitButton
 		callback: [ self answer ];
 		value: 'Cancelar'
-]
-
-{ #category : #rendering }
-CuooraQuestionEditorComponent >> renderTopicsOn: aCanvas [
-	aCanvas strong: 'Topicos: '.
-	topicos do: [ :each | self renderCheckBoxOf: each on: aCanvas ].
-	aCanvas break.
-	aCanvas horizontalRule. 
 ]
 
 { #category : #accessing }
@@ -109,6 +92,11 @@ CuooraQuestionEditorComponent >> titulo: anObject [
 ]
 
 { #category : #accessing }
-CuooraQuestionEditorComponent >> topicos: anObject [
-	topicos := anObject
+CuooraQuestionEditorComponent >> topicosAsociados [
+	^ topicosAsociados
+]
+
+{ #category : #accessing }
+CuooraQuestionEditorComponent >> topicosAsociados: anObject [
+	topicosAsociados := anObject
 ]
