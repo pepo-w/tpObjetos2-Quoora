@@ -89,7 +89,7 @@ Cuoora >> registrarUsuarioConNombre: unNombre password: unPassword [
 	^ (usuarios add: (Usuario conNombre: unNombre password: unPassword)).
 ]
 
-{ #category : #'private - testing' }
+{ #category : #accessing }
 Cuoora >> topicos [
 	^topicos copy.
 ]

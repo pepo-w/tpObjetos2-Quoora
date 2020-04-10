@@ -60,8 +60,9 @@ CuooraHomeComponent >> renderContentOn: aCanvas [
 	self renderHeaderOn: aCanvas.
 	self renderButtonOn: aCanvas.
 	self renderRelevantQuestionsOn: aCanvas.
-	
-
+	aCanvas anchor 
+		callback: [ self showAddTopics ];
+		with: [ aCanvas button with: 'Agregar tópicos de interes' ].
 ]
 
 { #category : #rendering }
@@ -88,6 +89,11 @@ CuooraHomeComponent >> renderRelevantQuestionsOn: aCanvas [
 		level: 2;
 		with: 'Ultimas Preguntas'.	
 	(self obtenerUltimasPreguntas) do: [ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ].
+]
+
+{ #category : #'as yet unclassified' }
+CuooraHomeComponent >> showAddTopics [ 
+	self call: (CuooraAddInterestTopicComponent new)
 ]
 
 { #category : #hooks }

@@ -32,7 +32,9 @@ CuooraProfileComponent >> renderContentOn: aCanvas [
 	aCanvas heading 
 		level: 2;
 		with: 'Perfil de ', self user nombre.
-	aCanvas emphasis: 'Puntaje: [', (self user calcularPuntaje) asString,']'.
+		
+	self renderUserInfoOn: aCanvas.
+	
 	aCanvas heading 
 		level: 3;
 		with: [aCanvas render: 'Preguntas'.
@@ -49,6 +51,17 @@ CuooraProfileComponent >> renderContentOn: aCanvas [
 { #category : #rendering }
 CuooraProfileComponent >> renderQuestionsOn: aCanvas [
 	(self user preguntas) do: [ :each | aCanvas render: (self questionViewForQuestion: each) ]. 
+]
+
+{ #category : #rendering }
+CuooraProfileComponent >> renderUserInfoOn: aCanvas [
+	aCanvas paragraph: [  
+	aCanvas
+		emphasis: 'Puntaje: [' , self user calcularPuntaje asString , ']'.
+	aCanvas break.
+	aCanvas render: 'Topicos de interes: '.
+	aCanvas emphasis: (self user topicosDeInteres collect: [ :each | each nombre ]) asCommaString ]
+		
 ]
 
 { #category : #accessing }
