@@ -3,8 +3,7 @@ Class {
 	#superclass : #WAComponent,
 	#instVars : [
 		'text',
-		'question',
-		'errorMsg'
+		'question'
 	],
 	#category : #'Objetos_2-Cuoora-UI'
 }

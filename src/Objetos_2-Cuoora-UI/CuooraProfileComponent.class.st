@@ -31,7 +31,11 @@ CuooraProfileComponent >> questionViewForQuestion: aQuestion [
 CuooraProfileComponent >> renderContentOn: aCanvas [
 	aCanvas heading 
 		level: 2;
-		with: [aCanvas render: 'Preguntas de ', self user nombre.
+		with: 'Perfil de ', self user nombre.
+	aCanvas emphasis: 'Puntaje: [', (self user calcularPuntaje) asString,']'.
+	aCanvas heading 
+		level: 3;
+		with: [aCanvas render: 'Preguntas'.
 				 (self verifyForFollowOption)
 					ifTrue: [ aCanvas render: ' - '.
 								 aCanvas anchor 
