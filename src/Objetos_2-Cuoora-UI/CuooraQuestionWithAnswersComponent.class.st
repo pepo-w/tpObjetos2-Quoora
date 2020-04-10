@@ -18,7 +18,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : #CuooraQuestionWithAnswersComponent,
-	#superclass : #WAComponent,
+	#superclass : #CuooraHeaderComponent,
 	#instVars : [
 		'question',
 		'questionView',
@@ -64,6 +64,7 @@ CuooraQuestionWithAnswersComponent >> questionView: anObject [
 
 { #category : #rendering }
 CuooraQuestionWithAnswersComponent >> renderContentOn: aCanvas [
+	self renderHeaderOn: aCanvas.
 	aCanvas render: questionView.
 	aCanvas render: responsesView.
 ]

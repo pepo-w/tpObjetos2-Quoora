@@ -1,17 +1,11 @@
 Class {
 	#name : #CuooraHomeComponent,
-	#superclass : #WAComponent,
+	#superclass : #CuooraHeaderComponent,
 	#instVars : [
 		'questionViews'
 	],
 	#category : #'Objetos_2-Cuoora-UI'
 }
-
-{ #category : #callbacks }
-CuooraHomeComponent >> cerrarSesion [
-	self session logout.
-	self answer.
-]
 
 { #category : #hooks }
 CuooraHomeComponent >> children [ 	
@@ -69,19 +63,6 @@ CuooraHomeComponent >> renderContentOn: aCanvas [
 ]
 
 { #category : #rendering }
-CuooraHomeComponent >> renderHeaderOn: aCanvas [
-	aCanvas div
-		class: 'right';
-		with: [ aCanvas
-				paragraph: [ aCanvas strong: self session user nombre , ' '.
-					aCanvas anchor
-						callback: [ self cerrarSesion ];
-						with: [ aCanvas button: 'logout' ] ] ].
-	aCanvas heading: 'CuOOra'.
-	aCanvas horizontalRule
-]
-
-{ #category : #rendering }
 CuooraHomeComponent >> renderRelevantQuestion: aQuestion on: aCanvas [
 	aCanvas render: (self questionViewForQuestion: aQuestion).
 ]
@@ -97,10 +78,4 @@ CuooraHomeComponent >> renderRelevantQuestionsOn: aCanvas [
 { #category : #'as yet unclassified' }
 CuooraHomeComponent >> showAddTopics [ 
 	self call: (CuooraAddInterestTopicComponent new)
-]
-
-{ #category : #updating }
-CuooraHomeComponent >> updateRoot: anHtmlRoot [
-	super updateRoot: anHtmlRoot.
-	anHtmlRoot stylesheet url: (CuooraFileLibrary urlOf: #mainCss).
 ]

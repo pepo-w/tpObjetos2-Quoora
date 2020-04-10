@@ -1,6 +1,6 @@
 Class {
 	#name : #CuooraProfileComponent,
-	#superclass : #WAComponent,
+	#superclass : #CuooraHeaderComponent,
 	#instVars : [
 		'user',
 		'questionViews'
@@ -29,6 +29,7 @@ CuooraProfileComponent >> questionViewForQuestion: aQuestion [
 
 { #category : #rendering }
 CuooraProfileComponent >> renderContentOn: aCanvas [
+	self renderHeaderOn: aCanvas.
 	aCanvas heading 
 		level: 2;
 		with: 'Perfil de ', self user nombre.

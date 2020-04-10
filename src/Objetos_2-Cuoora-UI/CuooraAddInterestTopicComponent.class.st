@@ -1,6 +1,6 @@
 Class {
 	#name : #CuooraAddInterestTopicComponent,
-	#superclass : #WAComponent,
+	#superclass : #CuooraHeaderComponent,
 	#instVars : [
 		'lastSelectedTopic'
 	],
@@ -28,6 +28,7 @@ CuooraAddInterestTopicComponent >> model [
 
 { #category : #rendering }
 CuooraAddInterestTopicComponent >> renderContentOn: aCanvas [
+	self renderHeaderOn: aCanvas.
 	aCanvas heading 
 		level: 2;
 		with: 'Tópicos de CuOOra'.

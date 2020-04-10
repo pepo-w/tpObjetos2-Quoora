@@ -1,6 +1,6 @@
 Class {
 	#name : #CuooraQuestionEditorComponent,
-	#superclass : #WAComponent,
+	#superclass : #CuooraHeaderComponent,
 	#instVars : [
 		'titulo',
 		'descripcion',
@@ -47,10 +47,11 @@ CuooraQuestionEditorComponent >> nuevaPregunta [
 
 { #category : #rendering }
 CuooraQuestionEditorComponent >> renderContentOn: aCanvas [
-	"Estaria bueno que tenga el mismo header que home"
-	aCanvas heading
-		level: 1;
-		with: 'Cuoora'.
+	self renderHeaderOn: aCanvas.
+	aCanvas heading 
+		level: 2;
+		with: 'Nueva pregunta '.
+	aCanvas horizontalRule.
 	aCanvas
 		form: [ self renderInputElementsOn: aCanvas.
 				  self renderSubmitButtonsOn: aCanvas ].
