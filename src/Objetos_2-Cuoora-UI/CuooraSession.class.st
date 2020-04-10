@@ -20,6 +20,7 @@ CuooraSession >> login: anUser [
 { #category : #'as yet unclassified' }
 CuooraSession >> logout [
 	user := nil.
+	self session unregister.
 ]
 
 { #category : #accessing }
