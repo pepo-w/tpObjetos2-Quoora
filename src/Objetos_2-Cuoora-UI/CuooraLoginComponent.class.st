@@ -78,3 +78,9 @@ CuooraLoginComponent >> renderInputElementsOn: aCanvas [
 		paragraph: [ aCanvas label: 'Contraseña: '.
 			aCanvas passwordInput required on: #password of: self ]
 ]
+
+{ #category : #updating }
+CuooraLoginComponent >> updateRoot: anHtmlRoot [
+	super updateRoot: anHtmlRoot.
+	anHtmlRoot stylesheet url: (CuooraFileLibrary urlOf: #mainCss).
+]

@@ -96,16 +96,8 @@ CuooraHomeComponent >> showAddTopics [
 	self call: (CuooraAddInterestTopicComponent new)
 ]
 
-{ #category : #hooks }
-CuooraHomeComponent >> style [
-	^'.right {
-    float: right;
-	}
-	a {
-	 text-decoration: none;
-	 color: rgb(0,15,70);
-	}
-	body {
-		font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
-	}'
+{ #category : #updating }
+CuooraHomeComponent >> updateRoot: anHtmlRoot [
+	super updateRoot: anHtmlRoot.
+	anHtmlRoot stylesheet url: (CuooraFileLibrary urlOf: #mainCss).
 ]
