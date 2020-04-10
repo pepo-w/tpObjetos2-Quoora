@@ -52,7 +52,10 @@ CuooraHomeComponent >> renderButtonOn: aCanvas [
 	aCanvas anchor
 		class: 'right';
 		callback: [ self crearPregunta ];
-		with: [ aCanvas button: 'Hacer una nueva pregunta' ]
+		with: [  
+			aCanvas imageButton 
+			url: (CuooraFileLibrary urlOf: #plusIconpngPng).
+			aCanvas render: 'crear pregunta' ].
 ]
 
 { #category : #rendering }
