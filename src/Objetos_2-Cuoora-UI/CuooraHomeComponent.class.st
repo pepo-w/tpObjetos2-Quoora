@@ -48,7 +48,7 @@ CuooraHomeComponent >> renderButtonOn: aCanvas [
 		callback: [ self crearPregunta ];
 		with: [  
 			aCanvas imageButton 
-			url: (CuooraFileLibrary urlOf: #plusIconpngPng).
+			url: (self library urlOf: #plusIconpngPng).
 			aCanvas render: 'crear pregunta' ].
 ]
 

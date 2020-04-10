@@ -18,9 +18,10 @@ CuooraCreateResponseComponent class >> question: aQuestion [
 
 { #category : #'as yet unclassified' }
 CuooraCreateResponseComponent >> crearRespuesta [ 
-	 (self text isEmptyOrNil)
-		 ifFalse: [ (self session user) crearRespuestaConTexto: self text paraPregunta: self question. 
-						 self answer].
+	(self text isEmptyOrNil)
+	ifTrue: [ ^ self ].
+	(self session user) crearRespuestaConTexto: self text paraPregunta: self question. 
+	self answer.
 ]
 
 { #category : #accessing }

@@ -48,11 +48,6 @@ CuooraResponsesComponent >> renderContentOn: aCanvas [
 
 { #category : #rendering }
 CuooraResponsesComponent >> renderResponse: aResponse on: aCanvas [
-	"Aca iran todos los datos de la respuesta para que quede de la siguiente manera: 
-		Respuesta de Pedro
-		Texto de la respuesta ....
-		0 likes | 0 dislikes
-		Like | Dislike"
 	aCanvas heading 
 		level: 3;
 		with: [ aCanvas render: 'Respuesta de '.
