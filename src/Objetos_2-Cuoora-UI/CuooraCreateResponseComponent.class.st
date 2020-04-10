@@ -3,7 +3,8 @@ Class {
 	#superclass : #WAComponent,
 	#instVars : [
 		'text',
-		'question'
+		'question',
+		'errorMsg'
 	],
 	#category : #'Objetos_2-Cuoora-UI'
 }
@@ -18,7 +19,9 @@ CuooraCreateResponseComponent class >> question: aQuestion [
 
 { #category : #'as yet unclassified' }
 CuooraCreateResponseComponent >> crearRespuesta [ 
-	
+	 (self text isEmptyOrNil)
+		 ifFalse: [ (self session user) crearRespuestaConTexto: self text paraPregunta: self question. 
+						 self answer].
 ]
 
 { #category : #accessing }
