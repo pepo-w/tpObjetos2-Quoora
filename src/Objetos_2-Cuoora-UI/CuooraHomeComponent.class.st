@@ -45,7 +45,7 @@ CuooraHomeComponent >> renderButtonOn: aCanvas [
 			aCanvas imageButton
 			url: (self library urlOf: #plusIconpngPng);
 			style: 'vertical-align:middle'.
-			aCanvas render: 'crear pregunta' ].
+			aCanvas render: 'Crear pregunta' ].
 ]
 
 { #category : #rendering }
@@ -64,7 +64,7 @@ CuooraHomeComponent >> renderRelevantQuestion: aQuestion on: aCanvas [
 CuooraHomeComponent >> renderRelevantQuestionsOn: aCanvas [
 	aCanvas heading
 		level: 2;
-		with: 'Ultimas Preguntas'.	
+		with: 'Últimas Preguntas'.	
 	(self obtenerUltimasPreguntas isEmpty)
 			ifTrue: [ aCanvas emphasis: 'No hay preguntas en tu feed' ]
 			ifFalse: [ self obtenerUltimasPreguntas do:[ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ]].

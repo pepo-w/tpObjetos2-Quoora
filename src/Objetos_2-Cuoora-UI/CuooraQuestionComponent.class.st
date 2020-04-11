@@ -31,7 +31,7 @@ CuooraQuestionComponent >> renderAuthorOn: aCanvas [
 	aCanvas anchor
 		callback: [ self showProfileFrom: self question autor];
 		with: [ aCanvas strong: question autor nombre. ].
-	
+	aCanvas break.
 ]
 
 { #category : #rendering }
@@ -39,13 +39,14 @@ CuooraQuestionComponent >> renderContentOn: aCanvas [
 	self renderTitleOn: aCanvas.
 	aCanvas paragraph: [  
 		self renderInfoOn: aCanvas.
-		self renderReactionOptionsOn:aCanvas ].
+		self renderReactionOptionsOn: aCanvas ].
 	aCanvas horizontalRule
 ]
 
 { #category : #rendering }
 CuooraQuestionComponent >> renderInfoOn: aCanvas [
-	aCanvas emphasis: 'Topicos: ', (question topicosAsociados collect: [ :each | each nombre ]) asCommaString.
+	aCanvas render: 'Tópicos: '.
+	aCanvas emphasis: (question topicosAsociados collect: [ :each | each nombre ]) asCommaString.
 	aCanvas break.
 	self renderAuthorOn: aCanvas.
 	aCanvas

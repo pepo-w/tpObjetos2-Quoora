@@ -7,8 +7,7 @@ Class {
 { #category : #rendering }
 CuooraQuestionPreview >> renderAuthorOn: aCanvas [
 	super renderAuthorOn: aCanvas.
-	aCanvas render: ' | '.
-	aCanvas render: question respuestas size asString , ' respuestas'.
+	aCanvas strong: question respuestas size asString , ' respuestas'.
 	aCanvas break
 ]
 

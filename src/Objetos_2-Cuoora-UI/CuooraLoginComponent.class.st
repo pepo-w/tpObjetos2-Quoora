@@ -60,7 +60,7 @@ CuooraLoginComponent >> password: anObject [
 CuooraLoginComponent >> renderContentOn: aCanvas [
 	aCanvas heading
 		level: 1;
-		with: 'Cuoora'.
+		with: 'CuOOra'.
 	aCanvas
 		form: [ self renderInputElementsOn: aCanvas.
 			aCanvas button
