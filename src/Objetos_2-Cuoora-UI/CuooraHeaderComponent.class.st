@@ -22,22 +22,36 @@ CuooraHeaderComponent >> model [
 
 { #category : #rendering }
 CuooraHeaderComponent >> renderHeaderOn: aCanvas [
-	aCanvas div
-		class: 'right';
-		with: [ aCanvas
-				paragraph: [ aCanvas strong: self session user nombre , ' '.
-					aCanvas anchor
-						callback: [ self cerrarSesion ];
-						with: [ aCanvas button: 'logout' ] ] ].
+	self renderUserNameOn: aCanvas.
 	aCanvas anchor 
 		callback: [ self showHome ];
 		with: [ aCanvas heading: 'CuOOra' ].
 	aCanvas horizontalRule
 ]
 
+{ #category : #rendering }
+CuooraHeaderComponent >> renderUserNameOn: aCanvas [
+	aCanvas div
+		class: 'right';
+		with: [ aCanvas
+				paragraph: [ aCanvas strong: [aCanvas anchor 
+																callback: [self showPersonalProfile];
+																with: self session user nombre , ' '] .
+								aCanvas anchor
+									callback: [ self cerrarSesion ];
+									with: [ aCanvas button: 'logout' ] ] ].
+]
+
 { #category : #geometry }
 CuooraHeaderComponent >> showHome [ 
 	self call: CuooraHomeComponent new.
+]
+
+{ #category : #'as yet unclassified' }
+CuooraHeaderComponent >> showPersonalProfile [ 
+	|view|
+	view := CuooraPersonalProfile user: self session user.
+	self call: view.
 ]
 
 { #category : #updating }

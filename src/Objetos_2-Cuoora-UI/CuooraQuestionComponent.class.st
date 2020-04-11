@@ -78,7 +78,9 @@ CuooraQuestionComponent >> renderTitleOn: aCanvas [
 { #category : #'as yet unclassified' }
 CuooraQuestionComponent >> showProfileFrom: anUser [
 	| view |
-	view := CuooraProfileComponent user: anUser.
+	(anUser = self session user) 
+		ifTrue: [ view := CuooraPersonalProfile user: self session user ] 
+		ifFalse: [ view := CuooraProfileComponent user: anUser ].
 	self session presenter call: view.
 ]
 

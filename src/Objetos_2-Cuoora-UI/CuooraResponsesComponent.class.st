@@ -85,6 +85,8 @@ CuooraResponsesComponent >> showCreateResponsesComponent [
 { #category : #'as yet unclassified' }
 CuooraResponsesComponent >> showProfileFrom: anUser [
 	| view |
-	view := CuooraProfileComponent user: anUser.
-	self session presenter call: view
+	(anUser = self session user) 
+		ifTrue: [ view := CuooraPersonalProfile user: self session user ] 
+		ifFalse: [ view := CuooraProfileComponent user: anUser ].
+	self session presenter call: view.
 ]

@@ -30,17 +30,8 @@ CuooraProfileComponent >> questionViewForQuestion: aQuestion [
 { #category : #rendering }
 CuooraProfileComponent >> renderContentOn: aCanvas [
 	self renderHeaderOn: aCanvas.
-	aCanvas heading 
-		level: 2;
-		with: [aCanvas render: 'Perfil de ', self user nombre. 
-					(self verifyForFollowOption)
-					ifTrue: [ aCanvas render: ' - '.
-								 aCanvas anchor 
-										callback: [ self session user seguirA: self user ];
-										with: 'Follow' ]].
-		
+	self renderTitleOn: aCanvas.
 	self renderUserInfoOn: aCanvas.
-	
 	aCanvas heading 
 		level: 3;
 		with: 'Preguntas'.
@@ -55,14 +46,28 @@ CuooraProfileComponent >> renderQuestionsOn: aCanvas [
 ]
 
 { #category : #rendering }
+CuooraProfileComponent >> renderTitleOn: aCanvas [
+	aCanvas heading
+		level: 2;
+		with: [ aCanvas render: 'Perfil de ' , self user nombre.
+			(self verifyForFollowOption)
+				ifTrue: [ aCanvas render: ' - '.
+					aCanvas anchor
+						callback: [ self session user seguirA: self user ];
+						with: 'Follow' ] ]
+]
+
+{ #category : #rendering }
 CuooraProfileComponent >> renderUserInfoOn: aCanvas [
-	aCanvas paragraph: [  
 	aCanvas
-		emphasis: 'Puntaje: [' , self user calcularPuntaje asString , ']'.
-	aCanvas break.
-	aCanvas render: 'Topicos de interes: '.
-	aCanvas emphasis: (self user topicosDeInteres collect: [ :each | each nombre ]) asCommaString ]
-		
+		paragraph: [ aCanvas
+				emphasis: 'Puntaje: [' , self user calcularPuntaje asString , ']'.
+			aCanvas break.
+			aCanvas render: 'Topicos de interes: '.
+			aCanvas
+				emphasis:
+					(self user topicosDeInteres collect: [ :each | each nombre ]) asCommaString.
+			aCanvas break ].
 ]
 
 { #category : #accessing }
