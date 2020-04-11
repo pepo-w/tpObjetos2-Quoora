@@ -2,7 +2,8 @@ Class {
 	#name : #CuooraQuestionComponent,
 	#superclass : #WAComponent,
 	#instVars : [
-		'question'
+		'question',
+		'clickedFromHome'
 	],
 	#category : #'Objetos_2-Cuoora-UI'
 }
@@ -13,6 +14,22 @@ CuooraQuestionComponent class >> question: aQuestion [
 	instance := self new.
 	instance question: aQuestion.
 	^instance.
+]
+
+{ #category : #accessing }
+CuooraQuestionComponent >> clickedFromHome [
+	^ clickedFromHome
+]
+
+{ #category : #accessing }
+CuooraQuestionComponent >> clickedFromHome: anObject [
+	clickedFromHome := anObject
+]
+
+{ #category : #initialization }
+CuooraQuestionComponent >> initialize [ 
+	super initialize.
+	self clickedFromHome: true.
 ]
 
 { #category : #accessing }
@@ -71,7 +88,8 @@ CuooraQuestionComponent >> renderTitleOn: aCanvas [
 		level: 3;
 		with: [ aCanvas anchor
 				callback:
-						[ self showQuestionWithAnswers];
+						[ (self clickedFromHome) 
+								ifTrue: [self showQuestionWithAnswers]];
 				with: [ aCanvas emphasis: question titulo ] ]
 ]
 
@@ -86,6 +104,8 @@ CuooraQuestionComponent >> showProfile [
 CuooraQuestionComponent >> showQuestionWithAnswers [
 	"Cada vez que se hace click en el título de una pregunta, se llama al componente que se declara a continuacion. Esto genera que cada vez que se hace click en el título se genera un call nuevo. Hay que ver si esto produce inconvenientes"
 	| component |
-	component := CuooraQuestionWithAnswersComponent question: self question.
+	component := CuooraQuestionWithAnswersComponent question: self question questionView: self.
+	self clickedFromHome: false.
 	self session presenter call: component.
+	self clickedFromHome: true.
 ]

@@ -21,11 +21,6 @@ CuooraAddInterestTopicComponent >> getValidTopics [
 	^ topics asSortedCollection: [ :t1 :t2 | (t1 nombre) asUppercase <= (t2 nombre) asUppercase ].
 ]
 
-{ #category : #accessing }
-CuooraAddInterestTopicComponent >> model [ 
-	^Cuoora unicaInstancia.
-]
-
 { #category : #rendering }
 CuooraAddInterestTopicComponent >> renderContentOn: aCanvas [
 	self renderHeaderOn: aCanvas.

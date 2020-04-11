@@ -32,11 +32,6 @@ CuooraQuestionEditorComponent >> descripcion: anObject [
 	descripcion := anObject
 ]
 
-{ #category : #accessing }
-CuooraQuestionEditorComponent >> model [ 
-	^Cuoora unicaInstancia.
-]
-
 { #category : #callbacks }
 CuooraQuestionEditorComponent >> nuevaPregunta [
 	self datosInvalidos

@@ -15,6 +15,11 @@ CuooraHeaderComponent >> library [
 	^ CuooraFileLibrary.
 ]
 
+{ #category : #accessing }
+CuooraHeaderComponent >> model [ 
+	^Cuoora unicaInstancia.
+]
+
 { #category : #rendering }
 CuooraHeaderComponent >> renderHeaderOn: aCanvas [
 	aCanvas div
@@ -24,8 +29,15 @@ CuooraHeaderComponent >> renderHeaderOn: aCanvas [
 					aCanvas anchor
 						callback: [ self cerrarSesion ];
 						with: [ aCanvas button: 'logout' ] ] ].
-	aCanvas heading: 'CuOOra'.
+	aCanvas anchor 
+		callback: [ self showHome ];
+		with: [ aCanvas heading: 'CuOOra' ].
 	aCanvas horizontalRule
+]
+
+{ #category : #geometry }
+CuooraHeaderComponent >> showHome [ 
+	self answer.
 ]
 
 { #category : #updating }

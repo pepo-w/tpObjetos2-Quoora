@@ -25,11 +25,6 @@ CuooraHomeComponent >> initialize [
 	questionViews := Dictionary new.
 ]
 
-{ #category : #accessing }
-CuooraHomeComponent >> model [ 
-	^Cuoora unicaInstancia.
-]
-
 { #category : #'as yet unclassified' }
 CuooraHomeComponent >> obtenerUltimasPreguntas [
 	"Retorna una coleccion con las ultimas 5 preguntas"
@@ -78,4 +73,9 @@ CuooraHomeComponent >> renderRelevantQuestionsOn: aCanvas [
 { #category : #'as yet unclassified' }
 CuooraHomeComponent >> showAddTopics [ 
 	self call: (CuooraAddInterestTopicComponent new)
+]
+
+{ #category : #callbacks }
+CuooraHomeComponent >> showHome [ 
+	^self
 ]
