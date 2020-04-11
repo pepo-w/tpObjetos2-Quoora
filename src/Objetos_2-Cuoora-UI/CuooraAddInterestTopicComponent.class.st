@@ -1,6 +1,6 @@
 Class {
 	#name : #CuooraAddInterestTopicComponent,
-	#superclass : #CuooraHeaderComponent,
+	#superclass : #CuooraPrincipalComponent,
 	#instVars : [
 		'lastSelectedTopic'
 	],

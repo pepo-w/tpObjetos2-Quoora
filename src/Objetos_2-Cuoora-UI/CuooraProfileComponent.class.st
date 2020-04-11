@@ -1,6 +1,6 @@
 Class {
 	#name : #CuooraProfileComponent,
-	#superclass : #CuooraHeaderComponent,
+	#superclass : #CuooraPrincipalComponent,
 	#instVars : [
 		'user',
 		'questionViews'

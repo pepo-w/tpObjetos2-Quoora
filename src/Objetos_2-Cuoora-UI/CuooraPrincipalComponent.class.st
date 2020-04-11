@@ -1,27 +1,27 @@
 Class {
-	#name : #CuooraHeaderComponent,
+	#name : #CuooraPrincipalComponent,
 	#superclass : #WAComponent,
 	#category : #'Objetos_2-Cuoora-UI'
 }
 
 { #category : #callbacks }
-CuooraHeaderComponent >> cerrarSesion [
+CuooraPrincipalComponent >> cerrarSesion [
 	self session logout.
 	self requestContext redirectTo: self application url.
 ]
 
 { #category : #accessing }
-CuooraHeaderComponent >> library [ 
+CuooraPrincipalComponent >> library [ 
 	^ CuooraFileLibrary.
 ]
 
 { #category : #accessing }
-CuooraHeaderComponent >> model [ 
+CuooraPrincipalComponent >> model [ 
 	^Cuoora unicaInstancia.
 ]
 
 { #category : #rendering }
-CuooraHeaderComponent >> renderHeaderOn: aCanvas [
+CuooraPrincipalComponent >> renderHeaderOn: aCanvas [
 	self renderUserNameOn: aCanvas.
 	aCanvas anchor 
 		callback: [ self showHome ];
@@ -30,7 +30,7 @@ CuooraHeaderComponent >> renderHeaderOn: aCanvas [
 ]
 
 { #category : #rendering }
-CuooraHeaderComponent >> renderUserNameOn: aCanvas [
+CuooraPrincipalComponent >> renderUserNameOn: aCanvas [
 	aCanvas div
 		class: 'right';
 		with: [ aCanvas
@@ -43,19 +43,19 @@ CuooraHeaderComponent >> renderUserNameOn: aCanvas [
 ]
 
 { #category : #geometry }
-CuooraHeaderComponent >> showHome [ 
+CuooraPrincipalComponent >> showHome [ 
 	self call: CuooraHomeComponent new.
 ]
 
 { #category : #'as yet unclassified' }
-CuooraHeaderComponent >> showPersonalProfile [ 
+CuooraPrincipalComponent >> showPersonalProfile [ 
 	|view|
 	view := CuooraPersonalProfile user: self session user.
 	self call: view.
 ]
 
 { #category : #updating }
-CuooraHeaderComponent >> updateRoot: anHtmlRoot [
+CuooraPrincipalComponent >> updateRoot: anHtmlRoot [
 	super updateRoot: anHtmlRoot.
 	anHtmlRoot stylesheet url: (self library urlOf: #mainCss).
 ]

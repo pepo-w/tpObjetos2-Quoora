@@ -1,6 +1,6 @@
 Class {
 	#name : #CuooraQuestionEditorComponent,
-	#superclass : #CuooraHeaderComponent,
+	#superclass : #CuooraPrincipalComponent,
 	#instVars : [
 		'titulo',
 		'descripcion',

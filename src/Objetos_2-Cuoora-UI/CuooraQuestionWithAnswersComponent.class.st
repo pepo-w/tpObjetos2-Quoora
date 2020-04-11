@@ -18,7 +18,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : #CuooraQuestionWithAnswersComponent,
-	#superclass : #CuooraHeaderComponent,
+	#superclass : #CuooraPrincipalComponent,
 	#instVars : [
 		'question',
 		'questionView',
