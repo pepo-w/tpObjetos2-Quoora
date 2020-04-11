@@ -42,8 +42,9 @@ CuooraHomeComponent >> renderButtonOn: aCanvas [
 		class: 'right';
 		callback: [ self crearPregunta ];
 		with: [  
-			aCanvas imageButton 
-			url: (self library urlOf: #plusIconpngPng).
+			aCanvas imageButton
+			url: (self library urlOf: #plusIconpngPng);
+			style: 'vertical-align:middle'.
 			aCanvas render: 'crear pregunta' ].
 ]
 

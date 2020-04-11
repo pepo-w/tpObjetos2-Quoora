@@ -1,6 +1,6 @@
 "
 ""ejecutando esto se agrega el file a la libreria de Cuoora""
-""CuooraFileLibrary addFileAt: 'C:\pharo\plusIcon.png'.""
+""CuooraFileLibrary addFileAt: 'C:\pharo\main.css'.""
 
 
 "
@@ -21,7 +21,9 @@ a {
 }
 body {
   font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
-}'
+}
+
+'
 ]
 
 { #category : #uploaded }

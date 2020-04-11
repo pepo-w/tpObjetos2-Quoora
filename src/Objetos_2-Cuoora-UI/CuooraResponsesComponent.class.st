@@ -38,11 +38,20 @@ CuooraResponsesComponent >> question: aQuestion [
 ]
 
 { #category : #rendering }
+CuooraResponsesComponent >> renderButtonOn: aCanvas [
+	aCanvas anchor
+		callback: [ self showCreateResponsesComponent ];
+		with: [  
+			aCanvas imageButton 
+			url: (CuooraFileLibrary urlOf: #plusIconpngPng);
+			style: 'vertical-align:middle'.
+			aCanvas render: 'Crear respuesta' ].
+]
+
+{ #category : #rendering }
 CuooraResponsesComponent >> renderContentOn: aCanvas [
 	self responses do: [ :each | self renderResponse: each on: aCanvas  ].
-	aCanvas anchor 
-		callback: [ self showCreateResponsesComponent ];
-		with: 'crear respuesta'.
+	self renderButtonOn: aCanvas.
 	
 ]
 
