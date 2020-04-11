@@ -61,10 +61,7 @@ CuooraLoginComponent >> renderContentOn: aCanvas [
 	aCanvas heading
 		level: 1;
 		with: 'CuOOra'.
-	errorMsg ifNotNil: [ aCanvas paragraph
-									style: 'color:red';
-									with: errorMsg. 
-									errorMsg := nil ].
+	self showErrorMsgOn: aCanvas.
 	aCanvas
 		form: [ self renderInputElementsOn: aCanvas.
 			aCanvas button
@@ -81,6 +78,14 @@ CuooraLoginComponent >> renderInputElementsOn: aCanvas [
 	aCanvas
 		paragraph: [ aCanvas label: 'Contraseña: '.
 			aCanvas passwordInput required on: #password of: self ]
+]
+
+{ #category : #'as yet unclassified' }
+CuooraLoginComponent >> showErrorMsgOn: aCanvas [
+	errorMsg ifNotNil: [ aCanvas paragraph
+								style: 'color:red';
+								with: errorMsg.
+								errorMsg := nil ]
 ]
 
 { #category : #updating }
