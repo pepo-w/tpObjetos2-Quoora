@@ -17,8 +17,9 @@ CuooraAddInterestTopicComponent >> addInterestTopic: aTopic [
 CuooraAddInterestTopicComponent >> getValidTopics [ 
 	| topics |
 	topics := (self model topicos).
-	(self session user topicosDeInteres) do: [ :each | topics remove: each ifAbsent: [ nil ] ].
-	^ topics asSortedCollection: [ :t1 :t2 | (t1 nombre) asUppercase <= (t2 nombre) asUppercase ].
+	topics removeAllFoundIn: (self session user topicosDeInteres).
+	^ topics.
+
 ]
 
 { #category : #rendering }

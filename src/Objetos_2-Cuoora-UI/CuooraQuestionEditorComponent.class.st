@@ -13,7 +13,7 @@ Class {
 CuooraQuestionEditorComponent >> crearTopicos [
 	| nombresTopicos |
 	nombresTopicos := topicosAsociados findBetweenSubstrings: ','.
-	^ nombresTopicos collect: [ :each | (self model agregarTopicoConNombre: each descripcion: '' ) ].
+	^ (nombresTopicos collect: [ :each | (self model agregarTopicoConNombre: each descripcion: '' ) ]) asSet.
 	
 ]
 

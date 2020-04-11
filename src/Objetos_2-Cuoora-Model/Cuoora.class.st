@@ -52,8 +52,8 @@ Cuoora class >> unicaInstancia [
 { #category : #adding }
 Cuoora >> agregarTopicoConNombre: unNombre descripcion: unaDescripcion [
 	| topico |
-	topico := topicos detect: [ :each | each nombre asLowercase = unNombre asLowercase ] ifNone: [ nil ].
-	topico ifNil: [ topico := (topicos add: (Topico conNombre: unNombre descripcion: unaDescripcion)) ].
+	topico := topicos detect: [ :each | each nombre asLowercase = (unNombre trim) asLowercase ] ifNone: [ nil ].
+	topico ifNil: [ topico := (topicos add: (Topico conNombre: (unNombre trim) descripcion: unaDescripcion)) ].
 	^ topico.
 ]
 
@@ -91,7 +91,7 @@ Cuoora >> registrarUsuarioConNombre: unNombre password: unPassword [
 
 { #category : #accessing }
 Cuoora >> topicos [
-	^topicos copy.
+	^ topicos copy 	asSortedCollection: [ :a :b | a nombre asLowercase < b nombre asLowercase ].
 ]
 
 { #category : #'private - testing' }
