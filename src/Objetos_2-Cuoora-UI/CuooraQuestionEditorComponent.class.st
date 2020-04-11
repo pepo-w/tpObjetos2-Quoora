@@ -17,11 +17,6 @@ CuooraQuestionEditorComponent >> crearTopicos [
 	
 ]
 
-{ #category : #boolean }
-CuooraQuestionEditorComponent >> datosInvalidos [
-	^ (self descripcion isEmpty or: [ self titulo isEmpty or: [ self topicosAsociados isEmpty ]]).
-]
-
 { #category : #accessing }
 CuooraQuestionEditorComponent >> descripcion [
 	^ descripcion
@@ -34,10 +29,8 @@ CuooraQuestionEditorComponent >> descripcion: anObject [
 
 { #category : #callbacks }
 CuooraQuestionEditorComponent >> nuevaPregunta [
-	self datosInvalidos
-		ifTrue: [ self inform: 'Debe completar todos los campos e ingresar al menos 1 topico' ]
-		ifFalse: [ self session user crearPreguntaConTitulo: titulo descripcion: descripcion topicosAsociados: self crearTopicos.
-			self answer ]
+	self session user crearPreguntaConTitulo: titulo descripcion: descripcion topicosAsociados: self crearTopicos.
+	self answer.
 ]
 
 { #category : #rendering }
@@ -53,20 +46,20 @@ CuooraQuestionEditorComponent >> renderContentOn: aCanvas [
 ]
 
 { #category : #rendering }
-CuooraQuestionEditorComponent >> renderInputElementsOn: aCanvas [
+CuooraQuestionEditorComponent >> renderInputElementsOn: aCanvas [ 
 	aCanvas label: 'Título: '.
 	aCanvas
-		paragraph: [ (aCanvas textInput on: #titulo of: self) size: 80;
+		paragraph: [ (aCanvas textInput required on: #titulo of: self) size: 80;
 			attributeAt: 'placeholder' put: 'ingrese aqui el titulo de su pregunta' ].
 	aCanvas label: 'Descripción: '.
 	aCanvas
-		paragraph: [ (aCanvas textArea on: #descripcion of: self)
+		paragraph: [ (aCanvas textArea required on: #descripcion of: self)
 				columns: 80;
 				rows: 5;
 				attributeAt: 'placeholder' put: 'ingrese aqui el desarrollo de su pregunta' ].
 	aCanvas label: 'Topicos: '.
 	aCanvas
-		paragraph: [ (aCanvas textInput on: #topicosAsociados of: self) size: 80; 
+		paragraph: [ (aCanvas textInput required on: #topicosAsociados of: self) size: 80; 
 			attributeAt: 'placeholder' put: 'ingrese topicos separados por coma' ].
 ]
 
@@ -76,8 +69,9 @@ CuooraQuestionEditorComponent >> renderSubmitButtonsOn: aCanvas [
 		callback: [ self nuevaPregunta ];
 		value: 'Crear pregunta'.
 	aCanvas submitButton
+		attributeAt: 'formnovalidate' put: true;
 		callback: [ self answer ];
-		value: 'Cancelar'
+		value: 'Cancelar'.
 ]
 
 { #category : #accessing }

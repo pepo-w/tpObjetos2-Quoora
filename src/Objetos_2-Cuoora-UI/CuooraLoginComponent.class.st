@@ -61,12 +61,16 @@ CuooraLoginComponent >> renderContentOn: aCanvas [
 	aCanvas heading
 		level: 1;
 		with: 'CuOOra'.
+	errorMsg ifNotNil: [ aCanvas paragraph
+									style: 'color:red';
+									with: errorMsg. 
+									errorMsg := nil ].
 	aCanvas
 		form: [ self renderInputElementsOn: aCanvas.
 			aCanvas button
 				callback: [ self nuevaSesion ];
 				with: 'Iniciar sesion' ].
-	errorMsg ifNotNil: [ aCanvas paragraph: errorMsg. errorMsg := nil ].
+	
 ]
 
 { #category : #rendering }

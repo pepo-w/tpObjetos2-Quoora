@@ -45,6 +45,7 @@ CuooraPrincipalComponent >> renderUserNameOn: aCanvas [
 { #category : #geometry }
 CuooraPrincipalComponent >> showHome [ 
 	self call: CuooraHomeComponent new.
+
 ]
 
 { #category : #'as yet unclassified' }

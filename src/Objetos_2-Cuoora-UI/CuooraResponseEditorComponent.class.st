@@ -18,8 +18,6 @@ CuooraResponseEditorComponent class >> question: aQuestion [
 
 { #category : #'as yet unclassified' }
 CuooraResponseEditorComponent >> crearRespuesta [ 
-	(self text isEmptyOrNil)
-	ifTrue: [ ^ self ].
 	(self session user) crearRespuestaConTexto: self text paraPregunta: self question. 
 	self answer.
 ]
@@ -40,6 +38,7 @@ CuooraResponseEditorComponent >> renderButtonsOn: aCanvas [
 		callback: [ self crearRespuesta ];
 		with: 'Guardar'.
 	aCanvas submitButton
+		attributeAt: 'formnovalidate' put: true;
 		callback: [ self answer ];
 		with: 'Cancelar'
 ]
@@ -55,7 +54,7 @@ CuooraResponseEditorComponent >> renderContentOn: aCanvas [
 CuooraResponseEditorComponent >> renderInputOn: aCanvas [
 	aCanvas label: 'RESPONDER'.
 	aCanvas
-		paragraph: [ (aCanvas textArea on: #text of: self)
+		paragraph: [ (aCanvas textArea required on: #text of: self)
 				columns: 70;
 				rows: 10;
 				attributeAt: 'placeholder'
