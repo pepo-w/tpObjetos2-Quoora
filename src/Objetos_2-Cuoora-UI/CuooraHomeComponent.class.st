@@ -33,7 +33,7 @@ CuooraHomeComponent >> obtenerUltimasPreguntas [
 
 { #category : #'as yet unclassified' }
 CuooraHomeComponent >> questionViewForQuestion: aQuestion [
-	^ questionViews at: aQuestion ifAbsentPut: [ CuooraQuestionComponent question: aQuestion ].
+	^ questionViews at: aQuestion ifAbsentPut: [ CuooraQuestionPreview question: aQuestion ].
 ]
 
 { #category : #rendering }

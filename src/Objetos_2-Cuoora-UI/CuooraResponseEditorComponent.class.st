@@ -1,5 +1,5 @@
 Class {
-	#name : #CuooraCreateResponseComponent,
+	#name : #CuooraResponseEditorComponent,
 	#superclass : #WAComponent,
 	#instVars : [
 		'text',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #services }
-CuooraCreateResponseComponent class >> question: aQuestion [ 
+CuooraResponseEditorComponent class >> question: aQuestion [ 
 	| instance |
 	instance := self new.
 	instance question: aQuestion.
@@ -17,7 +17,7 @@ CuooraCreateResponseComponent class >> question: aQuestion [
 ]
 
 { #category : #'as yet unclassified' }
-CuooraCreateResponseComponent >> crearRespuesta [ 
+CuooraResponseEditorComponent >> crearRespuesta [ 
 	(self text isEmptyOrNil)
 	ifTrue: [ ^ self ].
 	(self session user) crearRespuestaConTexto: self text paraPregunta: self question. 
@@ -25,17 +25,17 @@ CuooraCreateResponseComponent >> crearRespuesta [
 ]
 
 { #category : #accessing }
-CuooraCreateResponseComponent >> question [
+CuooraResponseEditorComponent >> question [
 	^ question
 ]
 
 { #category : #accessing }
-CuooraCreateResponseComponent >> question: anObject [
+CuooraResponseEditorComponent >> question: anObject [
 	question := anObject
 ]
 
 { #category : #rendering }
-CuooraCreateResponseComponent >> renderButtonsOn: aCanvas [
+CuooraResponseEditorComponent >> renderButtonsOn: aCanvas [
 	aCanvas submitButton 
 		callback: [ self crearRespuesta ];
 		with: 'Guardar'.
@@ -45,29 +45,30 @@ CuooraCreateResponseComponent >> renderButtonsOn: aCanvas [
 ]
 
 { #category : #rendering }
-CuooraCreateResponseComponent >> renderContentOn: aCanvas [
+CuooraResponseEditorComponent >> renderContentOn: aCanvas [
 	aCanvas
 		form: [ self renderInputOn: aCanvas.
 			self renderButtonsOn: aCanvas ]
 ]
 
 { #category : #rendering }
-CuooraCreateResponseComponent >> renderInputOn: aCanvas [
+CuooraResponseEditorComponent >> renderInputOn: aCanvas [
 	aCanvas label: 'RESPONDER'.
 	aCanvas
 		paragraph: [ (aCanvas textArea on: #text of: self)
-				columns: 80;
-				rows: 5;
+				columns: 70;
+				rows: 10;
 				attributeAt: 'placeholder'
-					put: 'Ingrese el texto de la respuesta' ]
+					put: 'Ingrese el texto de la respuesta';
+				style: 'resize:none'. ]
 ]
 
 { #category : #accessing }
-CuooraCreateResponseComponent >> text [
+CuooraResponseEditorComponent >> text [
 	^ text
 ]
 
 { #category : #accessing }
-CuooraCreateResponseComponent >> text: anObject [
+CuooraResponseEditorComponent >> text: anObject [
 	text := anObject
 ]

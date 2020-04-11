@@ -26,30 +26,33 @@ CuooraQuestionComponent >> question: anObject [
 ]
 
 { #category : #rendering }
-CuooraQuestionComponent >> renderBodyOn: aCanvas [
-	aCanvas emphasis: 'Topicos: ', (question topicosAsociados collect: [ :each | each nombre ]) asCommaString.
-	aCanvas break.
+CuooraQuestionComponent >> renderAuthorOn: aCanvas [ 
 	aCanvas render: 'Realizada por: '.
 	aCanvas anchor
 		callback: [ self showProfileFrom: self question autor];
 		with: [ aCanvas strong: question autor nombre. ].
-	aCanvas render: ' | '.
-	aCanvas render: question respuestas size asString , ' respuestas'.
-	aCanvas break.
-	aCanvas
-		render:
-			question cantLikes asString , ' likes | '
-				, question cantDislikes asString , ' dislikes'.
-	aCanvas break.
+	
 ]
 
 { #category : #rendering }
 CuooraQuestionComponent >> renderContentOn: aCanvas [
 	self renderTitleOn: aCanvas.
 	aCanvas paragraph: [  
-		self renderBodyOn: aCanvas.
+		self renderInfoOn: aCanvas.
 		self renderReactionOptionsOn:aCanvas ].
 	aCanvas horizontalRule
+]
+
+{ #category : #rendering }
+CuooraQuestionComponent >> renderInfoOn: aCanvas [
+	aCanvas emphasis: 'Topicos: ', (question topicosAsociados collect: [ :each | each nombre ]) asCommaString.
+	aCanvas break.
+	self renderAuthorOn: aCanvas.
+	aCanvas
+		render:
+			question cantLikes asString , ' likes | '
+				, question cantDislikes asString , ' dislikes'.
+	aCanvas break.
 ]
 
 { #category : #rendering }
@@ -72,7 +75,8 @@ CuooraQuestionComponent >> renderTitleOn: aCanvas [
 		with: [ aCanvas anchor
 				callback:
 						[ self showQuestionWithAnswers ];
-				with: [ aCanvas emphasis: question titulo ] ]
+				with: [ aCanvas emphasis: question titulo ] ].
+	aCanvas paragraph: question descripcion.
 ]
 
 { #category : #'as yet unclassified' }

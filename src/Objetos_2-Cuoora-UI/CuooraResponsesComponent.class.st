@@ -87,7 +87,7 @@ CuooraResponsesComponent >> responses [
 { #category : #'as yet unclassified' }
 CuooraResponsesComponent >> showCreateResponsesComponent [ 
 	| view |
-	view := CuooraCreateResponseComponent question: self question.
+	view := CuooraResponseEditorComponent question: self question.
 	self call: view.
 ]
 

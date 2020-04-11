@@ -25,6 +25,11 @@ Pregunta >> borrarRespuestas [
 	respuestas do: [ :each | each eliminate ].
 ]
 
+{ #category : #accessing }
+Pregunta >> descripcion [ 
+	^descripcion
+]
+
 { #category : #boolean }
 Pregunta >> incluyeTopico: unTopico [
 	^ topicosAsociados includes: unTopico.

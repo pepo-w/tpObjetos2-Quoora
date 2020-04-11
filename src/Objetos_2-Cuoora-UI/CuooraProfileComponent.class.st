@@ -24,7 +24,7 @@ CuooraProfileComponent >> initialize [
 
 { #category : #'as yet unclassified' }
 CuooraProfileComponent >> questionViewForQuestion: aQuestion [ 
-	^ questionViews at: aQuestion ifAbsentPut: [ CuooraQuestionComponent question: aQuestion ]
+	^ questionViews at: aQuestion ifAbsentPut: [ CuooraQuestionPreview question: aQuestion ]
 ]
 
 { #category : #rendering }
@@ -32,6 +32,7 @@ CuooraProfileComponent >> renderContentOn: aCanvas [
 	self renderHeaderOn: aCanvas.
 	self renderTitleOn: aCanvas.
 	self renderUserInfoOn: aCanvas.
+	aCanvas horizontalRule.
 	aCanvas heading 
 		level: 3;
 		with: 'Preguntas'.
