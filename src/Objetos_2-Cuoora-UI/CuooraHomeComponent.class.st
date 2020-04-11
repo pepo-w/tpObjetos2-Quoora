@@ -65,5 +65,7 @@ CuooraHomeComponent >> renderRelevantQuestionsOn: aCanvas [
 	aCanvas heading
 		level: 2;
 		with: 'Ultimas Preguntas'.	
-	(self obtenerUltimasPreguntas) do: [ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ].
+	(self obtenerUltimasPreguntas isEmpty)
+			ifTrue: [ aCanvas emphasis: 'No hay preguntas en tu feed' ]
+			ifFalse: [ self obtenerUltimasPreguntas do:[ :pregunta | self renderRelevantQuestion: pregunta on: aCanvas ]].
 ]

@@ -33,9 +33,6 @@ CuooraProfileComponent >> renderContentOn: aCanvas [
 	self renderTitleOn: aCanvas.
 	self renderUserInfoOn: aCanvas.
 	aCanvas horizontalRule.
-	aCanvas heading 
-		level: 3;
-		with: 'Preguntas'.
 	self renderQuestionsOn: aCanvas.
 	
 	
@@ -43,7 +40,13 @@ CuooraProfileComponent >> renderContentOn: aCanvas [
 
 { #category : #rendering }
 CuooraProfileComponent >> renderQuestionsOn: aCanvas [
-	(self user preguntas) do: [ :each | aCanvas render: (self questionViewForQuestion: each) ]. 
+	aCanvas heading 
+		level: 3;
+		with: 'Preguntas'.
+	(self user preguntas isEmpty)
+			ifTrue: [ aCanvas emphasis: 'Sin preguntas' ]
+			ifFalse: [ (self user preguntas) do: [ :each | aCanvas render: (self questionViewForQuestion: each) ] ].
+			 
 ]
 
 { #category : #rendering }

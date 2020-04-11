@@ -33,11 +33,14 @@ CuooraPersonalProfile >> renderFollowingUsersOn: aCanvas [
 
 { #category : #rendering }
 CuooraPersonalProfile >> renderQuestionsOn: aCanvas [
-	super renderQuestionsOn: aCanvas.
 	aCanvas anchor
+		class: 'right';
 		callback: [ self crearPregunta ];
-		with: [ aCanvas imageButton url: (self library urlOf: #plusIconpngPng).
-			aCanvas render: 'crear pregunta' ]
+		with: [ aCanvas imageButton 
+							url: (self library urlOf: #plusIconpngPng);
+							style: 'vertical-align:middle'.
+			aCanvas render: 'crear pregunta' ].
+	super renderQuestionsOn: aCanvas
 ]
 
 { #category : #rendering }
