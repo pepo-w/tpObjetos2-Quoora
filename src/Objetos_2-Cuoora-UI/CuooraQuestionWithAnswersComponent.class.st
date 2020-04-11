@@ -37,16 +37,6 @@ CuooraQuestionWithAnswersComponent class >> question: aQuestion [
 	^ instance
 ]
 
-{ #category : #services }
-CuooraQuestionWithAnswersComponent class >> question: aQuestion questionView: aQuestionComponent [
-	| instance |
-	instance := self new.
-	instance question: aQuestion.
-	instance questionView: aQuestionComponent.
-	instance responsesView: (CuooraResponsesComponent question: aQuestion).
-	^ instance
-]
-
 { #category : #hooks }
 CuooraQuestionWithAnswersComponent >> children [ 
 	^Array with: responsesView with: questionView.

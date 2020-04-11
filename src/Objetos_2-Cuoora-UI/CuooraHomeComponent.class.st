@@ -74,8 +74,3 @@ CuooraHomeComponent >> renderRelevantQuestionsOn: aCanvas [
 CuooraHomeComponent >> showAddTopics [ 
 	self call: (CuooraAddInterestTopicComponent new)
 ]
-
-{ #category : #callbacks }
-CuooraHomeComponent >> showHome [ 
-	^self
-]

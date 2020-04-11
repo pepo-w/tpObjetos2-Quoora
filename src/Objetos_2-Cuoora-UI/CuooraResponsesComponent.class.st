@@ -51,9 +51,12 @@ CuooraResponsesComponent >> renderResponse: aResponse on: aCanvas [
 	aCanvas heading 
 		level: 3;
 		with: [ aCanvas render: 'Respuesta de '.
-				  aCanvas emphasis: aResponse autor nombre ].
+				  aCanvas anchor
+						callback: [ self showProfileFrom: aResponse autor ];
+						with: aResponse autor nombre ].
 	aCanvas paragraph: [
-		aCanvas render: aResponse texto.
+		aCanvas emphasis: aResponse texto.
+		aCanvas break.
 		aCanvas break.
 		aCanvas render: (aResponse cantLikes asString), ' likes | ', (aResponse cantDislikes asString), ' dislikes '.
 		aCanvas break.
@@ -77,4 +80,11 @@ CuooraResponsesComponent >> showCreateResponsesComponent [
 	| view |
 	view := CuooraCreateResponseComponent question: self question.
 	self call: view.
+]
+
+{ #category : #'as yet unclassified' }
+CuooraResponsesComponent >> showProfileFrom: anUser [
+	| view |
+	view := CuooraProfileComponent user: anUser.
+	self session presenter call: view
 ]

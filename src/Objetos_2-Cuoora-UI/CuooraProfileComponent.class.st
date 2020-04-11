@@ -32,18 +32,18 @@ CuooraProfileComponent >> renderContentOn: aCanvas [
 	self renderHeaderOn: aCanvas.
 	aCanvas heading 
 		level: 2;
-		with: 'Perfil de ', self user nombre.
+		with: [aCanvas render: 'Perfil de ', self user nombre. 
+					(self verifyForFollowOption)
+					ifTrue: [ aCanvas render: ' - '.
+								 aCanvas anchor 
+										callback: [ self session user seguirA: self user ];
+										with: 'Follow' ]].
 		
 	self renderUserInfoOn: aCanvas.
 	
 	aCanvas heading 
 		level: 3;
-		with: [aCanvas render: 'Preguntas'.
-				 (self verifyForFollowOption)
-					ifTrue: [ aCanvas render: ' - '.
-								 aCanvas anchor 
-										callback: [ self session user seguirA: self user ];
-										with: 'Follow' ]].
+		with: 'Preguntas'.
 	self renderQuestionsOn: aCanvas.
 	
 	

@@ -37,7 +37,7 @@ CuooraHeaderComponent >> renderHeaderOn: aCanvas [
 
 { #category : #geometry }
 CuooraHeaderComponent >> showHome [ 
-	self answer.
+	self call: CuooraHomeComponent new.
 ]
 
 { #category : #updating }

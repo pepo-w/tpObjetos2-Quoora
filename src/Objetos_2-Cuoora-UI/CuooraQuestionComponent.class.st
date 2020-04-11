@@ -2,8 +2,7 @@ Class {
 	#name : #CuooraQuestionComponent,
 	#superclass : #WAComponent,
 	#instVars : [
-		'question',
-		'clickedFromHome'
+		'question'
 	],
 	#category : #'Objetos_2-Cuoora-UI'
 }
@@ -14,22 +13,6 @@ CuooraQuestionComponent class >> question: aQuestion [
 	instance := self new.
 	instance question: aQuestion.
 	^instance.
-]
-
-{ #category : #accessing }
-CuooraQuestionComponent >> clickedFromHome [
-	^ clickedFromHome
-]
-
-{ #category : #accessing }
-CuooraQuestionComponent >> clickedFromHome: anObject [
-	clickedFromHome := anObject
-]
-
-{ #category : #initialization }
-CuooraQuestionComponent >> initialize [ 
-	super initialize.
-	self clickedFromHome: true.
 ]
 
 { #category : #accessing }
@@ -48,7 +31,7 @@ CuooraQuestionComponent >> renderBodyOn: aCanvas [
 	aCanvas break.
 	aCanvas render: 'Realizada por: '.
 	aCanvas anchor
-		callback: [ self showProfile ];
+		callback: [ self showProfileFrom: self question autor];
 		with: [ aCanvas strong: question autor nombre. ].
 	aCanvas render: ' | '.
 	aCanvas render: question respuestas size asString , ' respuestas'.
@@ -88,15 +71,14 @@ CuooraQuestionComponent >> renderTitleOn: aCanvas [
 		level: 3;
 		with: [ aCanvas anchor
 				callback:
-						[ (self clickedFromHome) 
-								ifTrue: [self showQuestionWithAnswers]];
+						[ self showQuestionWithAnswers ];
 				with: [ aCanvas emphasis: question titulo ] ]
 ]
 
 { #category : #'as yet unclassified' }
-CuooraQuestionComponent >> showProfile [ 
+CuooraQuestionComponent >> showProfileFrom: anUser [
 	| view |
-	view := CuooraProfileComponent user: self question autor.
+	view := CuooraProfileComponent user: anUser.
 	self session presenter call: view.
 ]
 
@@ -104,8 +86,6 @@ CuooraQuestionComponent >> showProfile [
 CuooraQuestionComponent >> showQuestionWithAnswers [
 	"Cada vez que se hace click en el título de una pregunta, se llama al componente que se declara a continuacion. Esto genera que cada vez que se hace click en el título se genera un call nuevo. Hay que ver si esto produce inconvenientes"
 	| component |
-	component := CuooraQuestionWithAnswersComponent question: self question questionView: self.
-	self clickedFromHome: false.
+	component := CuooraQuestionWithAnswersComponent question: self question.
 	self session presenter call: component.
-	self clickedFromHome: true.
 ]
