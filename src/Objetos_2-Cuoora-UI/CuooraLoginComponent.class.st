@@ -57,6 +57,13 @@ CuooraLoginComponent >> password: anObject [
 ]
 
 { #category : #rendering }
+CuooraLoginComponent >> renderButtonOn: aCanvas [
+	^ aCanvas button
+		callback: [ self nuevaSesion ];
+		with: 'Iniciar sesion'
+]
+
+{ #category : #rendering }
 CuooraLoginComponent >> renderContentOn: aCanvas [
 	aCanvas heading
 		level: 1;
@@ -64,10 +71,7 @@ CuooraLoginComponent >> renderContentOn: aCanvas [
 	self showErrorMsgOn: aCanvas.
 	aCanvas
 		form: [ self renderInputElementsOn: aCanvas.
-			aCanvas button
-				callback: [ self nuevaSesion ];
-				with: 'Iniciar sesion' ].
-	
+			self renderButtonOn: aCanvas ]
 ]
 
 { #category : #rendering }

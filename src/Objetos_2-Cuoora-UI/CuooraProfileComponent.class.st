@@ -16,15 +16,27 @@ CuooraProfileComponent class >> user: anUser [
 	^ instance.
 ]
 
+{ #category : #hooks }
+CuooraProfileComponent >> children [ 
+	^ self questions collect: [ :each | self questionViewForQuestion: each ].
+	
+]
+
 { #category : #initialization }
 CuooraProfileComponent >> initialize [ 
 	super initialize.
 	questionViews := Dictionary new.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'dictionary access' }
 CuooraProfileComponent >> questionViewForQuestion: aQuestion [ 
 	^ questionViews at: aQuestion ifAbsentPut: [ CuooraQuestionPreview question: aQuestion ]
+]
+
+{ #category : #'as yet unclassified' }
+CuooraProfileComponent >> questions [ 
+	"Retorna las preguntas del usuario correspondiente al perfil actual, ordenadas con las más recientes primero"
+	^ (self user preguntas) asSortedCollection: [ :q1 :q2 | q1 fechaYHora > q2 fechaYHora ].
 ]
 
 { #category : #rendering }
@@ -45,7 +57,7 @@ CuooraProfileComponent >> renderQuestionsOn: aCanvas [
 		with: 'Preguntas'.
 	(self user preguntas isEmpty)
 			ifTrue: [ aCanvas emphasis: 'Sin preguntas' ]
-			ifFalse: [ (self user preguntas) do: [ :each | aCanvas render: (self questionViewForQuestion: each) ] ].
+			ifFalse: [ (self questions) do: [ :each | aCanvas render: (self questionViewForQuestion: each) ] ].
 			 
 ]
 
@@ -62,16 +74,20 @@ CuooraProfileComponent >> renderTitleOn: aCanvas [
 ]
 
 { #category : #rendering }
+CuooraProfileComponent >> renderTopicsOfInterestOn: aCanvas [
+	aCanvas render: 'Topicos de interes: '.
+	(self user topicosDeInteres) isEmpty
+		ifTrue: [ aCanvas strong: ' - ' ] 
+		ifFalse: [ aCanvas emphasis: (self user topicosDeInteres collect: [ :each | each nombre ]) asCommaString ].
+	aCanvas break.
+]
+
+{ #category : #rendering }
 CuooraProfileComponent >> renderUserInfoOn: aCanvas [
 	aCanvas
-		paragraph: [ aCanvas
-				emphasis: 'Puntaje: [' , self user calcularPuntaje asString , ']'.
-			aCanvas break.
-			aCanvas render: 'Topicos de interes: '.
-			aCanvas
-				emphasis:
-					(self user topicosDeInteres collect: [ :each | each nombre ]) asCommaString.
-			aCanvas break ].
+		paragraph: [ aCanvas emphasis: 'Puntaje: [' , self user calcularPuntaje asString , ']'.
+						 aCanvas break.
+						 self renderTopicsOfInterestOn: aCanvas ]
 ]
 
 { #category : #accessing }

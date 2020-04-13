@@ -56,27 +56,45 @@ CuooraResponsesComponent >> renderContentOn: aCanvas [
 ]
 
 { #category : #rendering }
+CuooraResponsesComponent >> renderReactionsOf: aResponse On: aCanvas [
+	aCanvas
+		render:
+			aResponse cantLikes asString , ' likes | '
+				, aResponse cantDislikes asString , ' dislikes '.
+	aCanvas break.
+	aCanvas anchor
+		callback: [ aResponse registrarLikeDe: self session user ];
+		with: 'Like '.
+	aCanvas render: ' | '.
+	^ aCanvas anchor
+		callback: [ aResponse registrarDislikeDe: self session user ];
+		with: 'Dislike'
+]
+
+{ #category : #rendering }
 CuooraResponsesComponent >> renderResponse: aResponse on: aCanvas [
-	aCanvas heading 
+	self renderTitleOf: aResponse On: aCanvas.
+	aCanvas
+		paragraph: [ self renderTextOf: aResponse On: aCanvas.
+						self renderReactionsOf: aResponse On: aCanvas ].
+	aCanvas horizontalRule
+]
+
+{ #category : #rendering }
+CuooraResponsesComponent >> renderTextOf: aResponse On: aCanvas [
+	aCanvas emphasis: aResponse texto.
+	aCanvas break.
+	aCanvas break
+]
+
+{ #category : #rendering }
+CuooraResponsesComponent >> renderTitleOf: aResponse On: aCanvas [
+	aCanvas heading
 		level: 3;
 		with: [ aCanvas render: 'Respuesta de '.
-				  aCanvas anchor
-						callback: [ self showProfileFrom: aResponse autor ];
-						with: aResponse autor nombre ].
-	aCanvas paragraph: [
-		aCanvas emphasis: aResponse texto.
-		aCanvas break.
-		aCanvas break.
-		aCanvas render: (aResponse cantLikes asString), ' likes | ', (aResponse cantDislikes asString), ' dislikes '.
-		aCanvas break.
-		aCanvas anchor 
-			callback: [aResponse registrarLikeDe: self session user];
-			with: 'Like '.
-		aCanvas render: ' | '.
-		aCanvas anchor 
-			callback: [ aResponse registrarDislikeDe: self session user ];
-			with: 'Dislike'. ].
-	aCanvas horizontalRule
+			aCanvas anchor
+				callback: [ self showProfileFrom: aResponse autor ];
+				with: aResponse autor nombre ]
 ]
 
 { #category : #accessing }

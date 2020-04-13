@@ -8,8 +8,8 @@ Class {
 }
 
 { #category : #hooks }
-CuooraHomeComponent >> children [ 	
-	^(self obtenerUltimasPreguntas) collect: [ :each | self questionViewForQuestion: each ].
+CuooraHomeComponent >> children [ 
+	^ self obtenerUltimasPreguntas collect: [ :each | self questionViewForQuestion: each ].
 ]
 
 { #category : #callbacks }
@@ -21,17 +21,16 @@ CuooraHomeComponent >> crearPregunta [
 { #category : #initialization }
 CuooraHomeComponent >> initialize [ 
 	super initialize.
-	self obtenerUltimasPreguntas.
 	questionViews := Dictionary new.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'model access' }
 CuooraHomeComponent >> obtenerUltimasPreguntas [
 	"Retorna una coleccion con las ultimas 5 preguntas"
 		^(((self model) preguntasRelevantesParaElUsuario: self session user) takeFirst: 5).
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'dictionary access' }
 CuooraHomeComponent >> questionViewForQuestion: aQuestion [
 	^ questionViews at: aQuestion ifAbsentPut: [ CuooraQuestionPreview question: aQuestion ].
 ]

@@ -24,9 +24,8 @@ CuooraPersonalProfile >> renderFollowingUsersListOn: aCanvas [
 { #category : #rendering }
 CuooraPersonalProfile >> renderFollowingUsersOn: aCanvas [
 	aCanvas strong: 'Sigues a: '.
-	aCanvas break.
 	((self user usuariosQueSigue isEmpty))
-		ifTrue: [ aCanvas emphasis: 'Todavía no sigues a nadie... que esperas muerto dale seguí a alguien forro' ] 
+		ifTrue: [ aCanvas emphasis: 'Todavía no sigues a nadie...' ] 
 		ifFalse: [ self renderFollowingUsersListOn: aCanvas ].
 	
 ]
