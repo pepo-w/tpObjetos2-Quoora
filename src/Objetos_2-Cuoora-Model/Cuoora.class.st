@@ -18,7 +18,7 @@ Cuoora class >> clearUnicaInstancia [
 
 { #category : #'instance creation' }
 Cuoora class >> unicaInstancia [
-	^ unicaInstancia ifNil: [ unicaInstancia := self new ].
+	^ unicaInstancia ifNil: [ unicaInstancia := CuooraSampler prebuiltCuoora].
 	
 ]
 
@@ -39,8 +39,6 @@ Cuoora >> buscarUsuarioConNombre: unNombre yPassword: aPassword [
 Cuoora >> initialize [ 
 	topicos := OrderedCollection new.
 	usuarios := OrderedCollection new.
-	"carga de datos de prueba"
-	CuooraSampler new prebuiltCuoora: self.
 ]
 
 { #category : #accessing }
@@ -60,7 +58,6 @@ Cuoora >> preguntasRelevantesParaElUsuario: unUsuario [
 
 { #category : #adding }
 Cuoora >> registrarUsuarioConNombre: unNombre password: unPassword [
-"deberia verificar que no se repita el nombre de usuario??"
 	^ (usuarios add: (Usuario conNombre: unNombre password: unPassword)).
 ]
 

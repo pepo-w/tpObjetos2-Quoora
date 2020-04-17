@@ -33,6 +33,8 @@ UsuarioTest >> testAgregarTopicoDeInteres [
 	self assert: (juan topicosDeInteres size) equals: 1.
 	juan agregarTopicoDeInteres: topico1.
 	self assert: (juan topicosDeInteres size) equals: 1.
+	juan agregarTopicoDeInteres: topico3.
+	self assert: (juan topicosDeInteres size) equals: 2.
 ]
 
 { #category : #tests }
@@ -42,7 +44,7 @@ UsuarioTest >> testBorrarPregunta [
 	pregunta:=pepe crearPreguntaConTitulo: 'un titulo' descripcion: 'blablabla' topicosAsociados: (OrderedCollection with:topico1 with:topico3).
 	flor crearRespuestaConTexto: 'hola te respondo' paraPregunta: pregunta.
 	juan crearRespuestaConTexto: 'hola yo tambien te respondo pepe querido' paraPregunta: pregunta.
-	flor crearRespuestaConTexto: 'la primer rta que di no me convencio' paraPregunta: pregunta.
+	flor crearRespuestaConTexto: 'la primer respeusta que dí no me convenció' paraPregunta: pregunta.
 		
 	self assert: (pepe preguntas size) equals: 1. 
 	self assert: (flor respuestas size) equals: 2.
@@ -54,6 +56,16 @@ UsuarioTest >> testBorrarPregunta [
 	self assert: flor respuestas isEmpty.
 	self assert: juan respuestas isEmpty.	
 	
+]
+
+{ #category : #tests }
+UsuarioTest >> testBorrarRespuesta [ 
+	| pregunta respuesta |
+	pregunta := juan crearPreguntaConTitulo: 'una Pregunta' descripcion: 'una Descripcion' topicosAsociados: (OrderedCollection with: topico1 with: topico2).
+	respuesta := flor crearRespuestaConTexto: 'Te respondo, juan' paraPregunta: pregunta.
+	self assert: (flor respuestas size) equals: 1.
+	flor borrarRespuesta: respuesta.
+	self assert: flor respuestas isEmpty.
 ]
 
 { #category : #tests }
@@ -131,5 +143,14 @@ UsuarioTest >> testSeguirA [
 	self deny: pepe usuariosQueSigue isEmpty.
 	pepe seguirA: flor.
 	self assert: (pepe usuariosQueSigue) size equals: 1.
+	
+]
+
+{ #category : #tests }
+UsuarioTest >> testSigueA [ 
+	pepe seguirA: flor.
+	self assert: (pepe sigueA: flor).
+	self deny: (flor sigueA: pepe).
+	self deny: (pepe sigueA: juan).
 	
 ]

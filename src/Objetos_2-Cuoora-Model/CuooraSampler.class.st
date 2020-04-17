@@ -5,9 +5,10 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-CuooraSampler >> prebuiltCuoora: cuoora [ 
-	| pedro diego juan oo1 testDeUnidad smalltalk question1 question2 |
-
+CuooraSampler class >> prebuiltCuoora [ 
+	| cuoora pedro diego juan oo1 testDeUnidad smalltalk question1 question2 |
+	
+	cuoora := Cuoora new.
 	"usuarios"
 	pedro := cuoora registrarUsuarioConNombre: 'pedro@cuoora.com' password: 'pedro@cuoora.com'.
 	diego := cuoora registrarUsuarioConNombre: 'diego@cuoora.com' password: 'diego@cuoora.com'.
