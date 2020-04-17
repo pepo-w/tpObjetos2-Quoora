@@ -15,13 +15,12 @@ CuooraFileLibrary >> mainCss [
 	^ '.right {
   float: right;
 }
-a:link {
+a, a:link, a:visited {
   text-decoration: none;
   color: rgb(0,15,70);
 }
-a:hover {
+a:hover, a:active {
   text-decoration: underline;
-  color: rgb(0,15,85);
 }
 body {
   font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
