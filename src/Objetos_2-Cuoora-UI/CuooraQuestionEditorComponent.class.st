@@ -67,7 +67,7 @@ CuooraQuestionEditorComponent >> renderInputElementsOn: aCanvas [
 CuooraQuestionEditorComponent >> renderSubmitButtonsOn: aCanvas [
 	aCanvas submitButton
 		callback: [ self nuevaPregunta ];
-		value: 'Crear pregunta'.
+		value: 'Guardar'.
 	aCanvas submitButton
 		attributeAt: 'formnovalidate' put: true;
 		callback: [ self answer ];

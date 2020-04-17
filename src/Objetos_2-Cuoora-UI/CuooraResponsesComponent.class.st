@@ -82,7 +82,7 @@ CuooraResponsesComponent >> renderResponse: aResponse on: aCanvas [
 
 { #category : #rendering }
 CuooraResponsesComponent >> renderTextOf: aResponse On: aCanvas [
-	aCanvas emphasis: aResponse texto.
+	aCanvas render: aResponse texto.
 	aCanvas break.
 	aCanvas break
 ]
@@ -91,10 +91,10 @@ CuooraResponsesComponent >> renderTextOf: aResponse On: aCanvas [
 CuooraResponsesComponent >> renderTitleOf: aResponse On: aCanvas [
 	aCanvas heading
 		level: 3;
-		with: [ aCanvas render: 'Respuesta de '.
+		with: [ aCanvas emphasis: 'Respuesta de '.
 			aCanvas anchor
 				callback: [ self showProfileFrom: aResponse autor ];
-				with: aResponse autor nombre ]
+				with: [ aCanvas emphasis: aResponse autor nombre ]]
 ]
 
 { #category : #accessing }

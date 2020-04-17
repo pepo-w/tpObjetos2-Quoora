@@ -69,5 +69,5 @@ CuooraPersonalProfile >> showAddTopics [
 CuooraPersonalProfile >> showProfileOf: anUser [ 
 	| view |
 	view := CuooraProfileComponent user: anUser.
-	self call: view.
+	self show: view.
 ]

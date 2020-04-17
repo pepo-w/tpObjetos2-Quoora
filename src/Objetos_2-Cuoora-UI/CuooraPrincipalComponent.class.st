@@ -44,7 +44,7 @@ CuooraPrincipalComponent >> renderUserNameOn: aCanvas [
 
 { #category : #geometry }
 CuooraPrincipalComponent >> showHome [ 
-	self call: CuooraHomeComponent new.
+	self show: CuooraHomeComponent new.
 
 ]
 
@@ -52,7 +52,7 @@ CuooraPrincipalComponent >> showHome [
 CuooraPrincipalComponent >> showPersonalProfile [ 
 	|view|
 	view := CuooraPersonalProfile user: self session user.
-	self call: view.
+	self show: view.
 ]
 
 { #category : #updating }

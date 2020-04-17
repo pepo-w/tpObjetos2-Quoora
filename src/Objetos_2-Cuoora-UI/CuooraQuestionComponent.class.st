@@ -86,13 +86,12 @@ CuooraQuestionComponent >> showProfileFrom: anUser [
 	view := anUser = self session user
 		ifTrue: [ CuooraPersonalProfile user: self session user ]
 		ifFalse: [ CuooraProfileComponent user: anUser ].
-	self session presenter call: view
+	self session presenter show: view
 ]
 
 { #category : #callbacks }
 CuooraQuestionComponent >> showQuestionWithAnswers [
-	"Cada vez que se hace click en el título de una pregunta, se llama al componente que se declara a continuacion. Esto genera que cada vez que se hace click en el título se genera un call nuevo. Hay que ver si esto produce inconvenientes"
 	| component |
 	component := CuooraQuestionWithAnswersComponent question: self question.
-	self session presenter call: component.
+	self session presenter show: component.
 ]

@@ -85,7 +85,9 @@ CuooraProfileComponent >> renderTopicsOfInterestOn: aCanvas [
 { #category : #rendering }
 CuooraProfileComponent >> renderUserInfoOn: aCanvas [
 	aCanvas
-		paragraph: [ aCanvas emphasis: 'Puntaje: [' , self user calcularPuntaje asString , ']'.
+		paragraph: [ aCanvas render: 'Puntaje: ['.
+				 	    aCanvas strong: self user calcularPuntaje asString. 
+						 aCanvas render: ']'.
 						 aCanvas break.
 						 self renderTopicsOfInterestOn: aCanvas ]
 ]
