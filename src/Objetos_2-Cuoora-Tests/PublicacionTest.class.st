@@ -6,7 +6,7 @@ Class {
 
 { #category : #tests }
 PublicacionTest >> testDiferenciaLikes [
-	| publicacion |
+	|publicacion|
 	publicacion := Respuesta conTexto: 'texto' autor: (Object new) pregunta: (Object new).
 	self assert: (publicacion diferenciaLikes) equals: 0.
 	publicacion registrarLikeDe: (Object new).
@@ -20,8 +20,8 @@ PublicacionTest >> testDiferenciaLikes [
 
 { #category : #tests }
 PublicacionTest >> testRegistrarDislikeDe [
-	| publicacion usuario|
-	usuario := Usuario conNombre: 'José' password: 'abcde'.
+	|publicacion usuario|
+	usuario := (Object new).
 	publicacion := Pregunta conTitulo: 'titulo' descripcion: 'descripcion' topicosAsociados: (OrderedCollection new) autor: usuario.
 	self assert: (publicacion cantDislikes) equals: 0.
 	publicacion registrarDislikeDe: usuario.
@@ -35,8 +35,8 @@ PublicacionTest >> testRegistrarDislikeDe [
 
 { #category : #tests }
 PublicacionTest >> testRegistrarLikeDe [
-	| publicacion usuario |
-	usuario := Usuario conNombre: 'José' password: 'abcde'.
+	|publicacion usuario|
+	usuario := Object new.
 	publicacion := Pregunta conTitulo: 'titulo' descripcion: 'descripcion' topicosAsociados: (OrderedCollection new) autor: usuario.
 	self assert: (publicacion cantLikes) equals: 0.
 	publicacion registrarLikeDe: usuario.

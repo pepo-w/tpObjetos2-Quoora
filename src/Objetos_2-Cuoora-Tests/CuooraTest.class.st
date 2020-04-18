@@ -27,16 +27,14 @@ CuooraTest >> testAgregarTopicoConNombredescripcion [
 	self assert: (sistema topicos size) equals: 1.
 	sistema agregarTopicoConNombre: ' topico1 ' descripcion: 'blablabla'.
 	self assert: (sistema topicos size) equals: 1.
-	sistema agregarTopicoConNombre: 'topico 1' descripcion:'blablabla'.
+	sistema agregarTopicoConNombre: 'topico2' descripcion:'blablabla'.
 	self assert: (sistema topicos size) equals: 2. 
 ]
 
 { #category : #tests }
 CuooraTest >> testBuscarUsuarioConNombreYPassword [
-	| user |
-	
+	|user|
 	sistema registrarUsuarioConNombre: 'Dave Chappelle' password: '12345'.
-	
 	user := sistema buscarUsuarioConNombre: 'Dave Chappelle' yPassword: '12345'.
 	self assert: user isNotNil.
 	user := sistema buscarUsuarioConNombre: 'Dave Chappelle' yPassword: '123456'.
@@ -49,7 +47,7 @@ CuooraTest >> testBuscarUsuarioConNombreYPassword [
 
 { #category : #tests }
 CuooraTest >> testObtenerPreguntasConTopico [
-   |  juan pepe |
+   |juan pepe|
 	juan := sistema registrarUsuarioConNombre: 'juan' password: '1234'.
 	pepe := sistema registrarUsuarioConNombre: 'pepe' password: '5678'.
 	juan crearPreguntaConTitulo: 'pregunta 1' descripcion: 'con topico1' topicosAsociados: (OrderedCollection with: topico1).
@@ -61,10 +59,10 @@ CuooraTest >> testObtenerPreguntasConTopico [
 
 { #category : #tests }
 CuooraTest >> testPreguntasRelevantesParaElUsuario [ 
-	|preguntaDePepe juan pepe|
+	|juan pepe|
 	juan := sistema registrarUsuarioConNombre: 'juan' password: '1234'.
 	pepe := sistema registrarUsuarioConNombre: 'pepe' password: '5678'.
-	preguntaDePepe := pepe crearPreguntaConTitulo: 'pregunta de pepe' descripcion: 'con topico1' topicosAsociados: (OrderedCollection with: topico1).
+	pepe crearPreguntaConTitulo: 'pregunta de pepe' descripcion: 'con topico1' topicosAsociados: (OrderedCollection with: topico1).
 	juan crearPreguntaConTitulo: 'pregunta de juan' descripcion: 'con topico2' topicosAsociados: (OrderedCollection with: topico2).
 	self assert: (sistema preguntasRelevantesParaElUsuario: juan) isEmpty.
 	juan agregarTopicoDeInteres: topico2. 
@@ -73,13 +71,10 @@ CuooraTest >> testPreguntasRelevantesParaElUsuario [
 	juan seguirA: pepe.
 	"ahora la pregunta de pepe es relevante porque lo sigue"
 	self assert: (sistema preguntasRelevantesParaElUsuario: juan) size equals: 2.
-	"la pregunta de juan deberia estar primero en la coleccion por ser mas reciente"
-	self assert: (sistema preguntasRelevantesParaElUsuario: juan) last equals: preguntaDePepe.
 	juan agregarTopicoDeInteres: topico1. 
 	"este caso comprueba que la coleccion que retorna el metodo no tenga preguntas repetidas"
 	self assert: (sistema preguntasRelevantesParaElUsuario: juan) size equals: 2.
-	pepe borrarPregunta: preguntaDePepe.
-	self assert: (sistema preguntasRelevantesParaElUsuario: juan) size equals: 1.
+	
 ]
 
 { #category : #tests }

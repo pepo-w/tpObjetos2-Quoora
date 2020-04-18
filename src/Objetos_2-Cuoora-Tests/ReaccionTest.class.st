@@ -6,13 +6,10 @@ Class {
 
 { #category : #tests }
 ReaccionTest >> testEsDelAutor [ 
-	| pepe juan reaccion|
-	
-	pepe := Usuario conNombre: 'pepe' password: '12345'.
-	juan := Usuario conNombre: 'juan' password: '12345'.
-	
+	|pepe juan reaccion|
+	pepe := Object new.
+	juan := Object new.
 	reaccion:= Reaccion conAutor: juan.
-	
 	self assert: (reaccion esDelAutor: juan).
 	self deny: (reaccion esDelAutor: pepe).
 ]
